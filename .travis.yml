@@ -12,14 +12,14 @@ env:
     - NODE_ENV=test
 
 script:
-  - yarn test
-  - yarn build
+  - npm test
+  - npm run build
 after_success:
   - npm run coverage
 
 deploy:
   provider: heroku
-  app: uno-back
+  app: uno-client
   api_key:
     secure: ${HEROKU_API_KEY}
   on:
