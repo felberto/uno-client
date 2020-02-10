@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/felberto/uno-client.svg?branch=master)](https://travis-ci.com/felberto/uno-client)
+[![Maintainability](https://api.codeclimate.com/v1/badges/c41cab827e7a3345aa33/maintainability)](https://codeclimate.com/github/felberto/uno-client/maintainability)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
