@@ -15,28 +15,12 @@
   "devDependencies": {
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
-    "eslint": "^6.8.0",
-    "eslint-plugin-react": "^7.18.3",
-    "jest-junit": "^10.0.0"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}",
-      "!**/node_modules/**",
-      "!build/**"
-    ],
-    "coverageReporters": [
-      "lcov",
-      "text"
-    ]
-  },
-  "jest-junit": {
-    "output": "test-results/test-report.junit.xml"
+    "jest-enzyme": "^7.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

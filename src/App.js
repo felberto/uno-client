@@ -3,8 +3,6 @@ import logo from './logo.svg';
 import './App.css';
 import socketIOClient from "socket.io-client";
 
-var socket;
-
 class App extends Component {
 
     constructor() {
@@ -12,7 +10,7 @@ class App extends Component {
         this.state = {
             endpoint: 'http://localhost:8001/'
         };
-        socket = socketIOClient(this.state.endpoint);
+        let socket = socketIOClient(this.state.endpoint);
     }
 
     render() {

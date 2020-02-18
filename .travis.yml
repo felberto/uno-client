@@ -21,8 +21,7 @@ env:
     - NODE_ENV=test
 
 script:
-  - npm run test
-  - jest
+  - npm run test --coverage --watchAll=false
   - npm run build
   - sonar-scanner
 
