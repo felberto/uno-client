@@ -2,7 +2,7 @@ dist: trusty
 sudo: required
 
 addons:
-  sonarqube:
+  sonarcloud:
     organization: "felberto-github"
     token:
       secure: ${SONAR_TOKEN}
