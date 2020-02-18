@@ -12,6 +12,27 @@
     "react-scripts": "3.3.1",
     "socket.io-client": "latest"
   },
+  "devDependencies": {
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.7.0",
+    "jest-junit": "^3.6.0"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!build/**"
+    ],
+    "coverageReporters": [
+      "lcov",
+      "text"
+    ]
+  },
+  "jest-junit": {
+    "output": "test-results/test-report.junit.xml"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
