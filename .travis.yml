@@ -20,18 +20,23 @@ env:
   global:
     - NODE_ENV=test
 
-script:
-  - npm run test --coverage --watchAll=false
-  - npm run build
-
-after_success:
-  - npm run coverage
-  - sonar-scanner
-
-deploy:
-  provider: heroku
-  app: uno-client
-  api_key:
-    secure: ${HEROKU_API_KEY}
-  on:
-    branch: release
+jobs:
+  include:
+    - stage: test
+      script:
+        - npm run test --coverage --watchAll=false
+    - stage: build
+      script:
+        - npm run build
+    - stage: sonar
+      script:
+        - sonar-scanner
+    - stage: deploy
+      if: branch = release
+      deploy:
+        provider: heroku
+        app: uno-client
+        api_key:
+          secure: ${HEROKU_API_KEY}
+        on:
+          branch: release
