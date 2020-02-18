@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.com/felberto/uno-client.svg?branch=master)](https://travis-ci.com/felberto/uno-client)
-[![Maintainability](https://api.codeclimate.com/v1/badges/c41cab827e7a3345aa33/maintainability)](https://codeclimate.com/github/felberto/uno-client/maintainability)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=felberto%3Auno-client&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=felberto%3Auno-client)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=felberto%3Auno-client&metric=coverage)](https://sonarcloud.io/dashboard?id=felberto%3Auno-client)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

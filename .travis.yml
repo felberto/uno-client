@@ -30,6 +30,7 @@ jobs:
         - npm run build
     - stage: sonar
       script:
+        - npm test -- --coverage --watchAll=false
         - sonar-scanner
     - stage: deploy
       if: branch = release
