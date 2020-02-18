@@ -23,10 +23,10 @@ env:
 script:
   - npm run test --coverage --watchAll=false
   - npm run build
-  - sonar-scanner
 
 after_success:
   - npm run coverage
+  - sonar-scanner
 
 deploy:
   provider: heroku
