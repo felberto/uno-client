@@ -24,7 +24,7 @@ jobs:
   include:
     - stage: test
       script:
-        - npm run test --coverage --watchAll=false
+        - npm test -- --coverage --watchAll=false
     - stage: build
       script:
         - npm run build
