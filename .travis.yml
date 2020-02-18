@@ -22,6 +22,7 @@ env:
 
 script:
   - npm run test
+  - jest
   - npm run build
   - sonar-scanner
 
