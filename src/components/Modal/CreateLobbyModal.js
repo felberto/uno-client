@@ -4,6 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import {withRouter} from "react-router-dom";
 
 class CreateLobbyModal extends React.Component {
 
@@ -41,12 +42,13 @@ class CreateLobbyModal extends React.Component {
         event.preventDefault();
         window.$socket.emit('createLobby', this.state.lobbyName, this.state.userName);
         this.handleReset();
+        this.props.history.push('/game')
     }
 
     render() {
         return (
             <Modal
-                {...this.props}
+                show={this.props.show}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -93,4 +95,4 @@ class CreateLobbyModal extends React.Component {
     }
 }
 
-export default CreateLobbyModal;
+export default withRouter(CreateLobbyModal);

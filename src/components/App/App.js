@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import logo from '../../logo.svg';
 import socketIOClient from "socket.io-client";
-import {Button} from "react-bootstrap";
-import CreateLobbyModal from '../Modal/CreateLobbyModal';
-import JoinLobbyModal from "../Modal/JoinLobbyModal";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
+import Game from "../Game/Game";
+import Home from "../Home/Home";
 
 window.$socket = socketIOClient('http://localhost:8001/');
 
@@ -11,59 +10,22 @@ class App extends Component {
 
     constructor(props, context) {
         super(props, context);
-
-        this.state = {
-            show: false
-        };
     }
 
     render() {
-        let createLobbyModalClose = () => this.setState({createLobbyModalShow: false});
-        let joinLobbyModalClose = () => this.setState({joinLobbyModalShow: false});
-
         return (
-            <div>
-                <div style={{width: '100vh', height: '80vh', margin: '0 auto', padding: '10%'}}>
-                    <div style={{
-                        display: 'inline-block',
-                        float: 'left',
-                        width: '50%',
-                        height: '100%',
-                        backgroundColor: 'red'
-                    }}>
-                        <img src={logo} className="App-logo" alt="logo"/>
-                    </div>
-                    <div style={{
-                        display: 'inline-block',
-                        margin: '0 auto',
-                        padding: '3px',
-                        float: 'right',
-                        width: '50%',
-                        height: '100%',
-                        backgroundColor: 'blue'
-                    }}>
-                        <Button onClick={() => this.setState({createLobbyModalShow: true})} variant="secondary"
-                                size="lg"
-                                active style={{display: 'block'}}>
-                            Lobby erstellen
-                        </Button>
-                        <CreateLobbyModal
-                            show={this.state.createLobbyModalShow}
-                            onHide={createLobbyModalClose}
-                        />
-                        < br/>
-                        <Button onClick={() => this.setState({joinLobbyModalShow: true})} variant="secondary" size="lg"
-                                active
-                                style={{display: 'block'}}>
-                            Lobby beitreten
-                        </Button>
-                        <JoinLobbyModal
-                            show={this.state.joinLobbyModalShow}
-                            onHide={joinLobbyModalClose}
-                        />
-                    </div>
+            <BrowserRouter>
+                <div>
+                    <Switch>
+                        <Route path="/game">
+                            <Game/>
+                        </Route>
+                        <Route path="/">
+                            <Home/>
+                        </Route>
+                    </Switch>
                 </div>
-            </div>
+            </BrowserRouter>
         );
     }
 }
