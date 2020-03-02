@@ -5,16 +5,16 @@ import {Button} from "react-bootstrap";
 import CreateLobbyModal from '../Modal/CreateLobbyModal';
 import JoinLobbyModal from "../Modal/JoinLobbyModal";
 
+window.$socket = socketIOClient('http://localhost:8001/');
+
 class App extends Component {
 
     constructor(props, context) {
         super(props, context);
 
         this.state = {
-            endpoint: 'http://localhost:8001/',
             show: false
         };
-        let socket = socketIOClient(this.state.endpoint);
     }
 
     render() {
@@ -45,7 +45,7 @@ class App extends Component {
                         <Button onClick={() => this.setState({createLobbyModalShow: true})} variant="secondary"
                                 size="lg"
                                 active style={{display: 'block'}}>
-                            Create Lobby
+                            Lobby erstellen
                         </Button>
                         <CreateLobbyModal
                             show={this.state.createLobbyModalShow}
@@ -55,7 +55,7 @@ class App extends Component {
                         <Button onClick={() => this.setState({joinLobbyModalShow: true})} variant="secondary" size="lg"
                                 active
                                 style={{display: 'block'}}>
-                            Join Lobby
+                            Lobby beitreten
                         </Button>
                         <JoinLobbyModal
                             show={this.state.joinLobbyModalShow}
