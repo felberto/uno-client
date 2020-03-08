@@ -5,10 +5,6 @@ import Home from "../Home/Home";
 
 class App extends Component {
 
-    constructor(props, context) {
-        super(props, context);
-    }
-
     render() {
         return (
             <BrowserRouter>
