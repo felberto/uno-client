@@ -5,19 +5,20 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import {withRouter} from "react-router-dom";
+import socketInstance from "../../util/Socket";
 
 class CreateLobbyModal extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            lobbyName: '',
+            roomName: '',
             userName: ''
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleReset = this.handleReset.bind(this);
-        this.createLobby = this.createLobby.bind(this);
+        this.createRoom = this.createRoom.bind(this);
     }
 
     handleInputChange(event) {
@@ -32,17 +33,20 @@ class CreateLobbyModal extends React.Component {
 
     handleReset(event) {
         this.setState({
-            lobbyName: '',
+            roomName: '',
             userName: ''
         });
         this.props.onHide();
     }
 
-    createLobby(event) {
+    createRoom(event) {
         event.preventDefault();
-        window.$socket.emit('createLobby', this.state.lobbyName, this.state.userName);
-        this.handleReset();
-        this.props.history.push('/game')
+        if (socketInstance.socket.emit('createRoom', this.state.roomName, this.state.userName)) {
+            this.handleReset();
+            this.props.history.push('/game');
+        } else {
+            return false;
+        }
     }
 
     render() {
@@ -53,20 +57,20 @@ class CreateLobbyModal extends React.Component {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title id="contained-modal-title-vcenter">
                         Lobby erstellen
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form id="createLobby" onSubmit={this.createLobby}>
-                        <Form.Group as={Row} controlId="formHorizontalLobbyName">
+                    <Form id="createRoom" onSubmit={this.createRoom}>
+                        <Form.Group as={Row} controlId="formHorizontalRoomName">
                             <Form.Label column sm={2}>
                                 Lobby Name
                             </Form.Label>
                             <Col sm={10}>
-                                <Form.Control name="lobbyName"
-                                              value={this.state.lobbyName}
+                                <Form.Control name="roomName"
+                                              value={this.state.roomName}
                                               onChange={this.handleInputChange}
                                               type="text"
                                               placeholder="Lobby Name"/>
@@ -88,7 +92,7 @@ class CreateLobbyModal extends React.Component {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={this.handleReset}>Abbrechen</Button>
-                    <Button form="createLobby" type={onsubmit}>Lobby erstellen</Button>
+                    <Button form="createRoom" type={onsubmit}>Lobby erstellen</Button>
                 </Modal.Footer>
             </Modal>
         );
