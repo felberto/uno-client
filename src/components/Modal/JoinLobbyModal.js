@@ -11,7 +11,7 @@ class JoinLobbyModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            lobbyName: '',
+            lobbyName: undefined,
             userName: '',
             rooms: []
         };
@@ -41,9 +41,8 @@ class JoinLobbyModal extends React.Component {
         });
     }
 
-    handleDropdownChange(e) {
-        this.setState({lobbyName: e.target.value});
-        console.log(this.state.lobbyName);
+    handleDropdownChange(event) {
+        this.setState({lobbyName: event.target.value});
     }
 
     handleReset(event) {
@@ -84,7 +83,8 @@ class JoinLobbyModal extends React.Component {
                                 Lobby Name
                             </Form.Label>
                             <Col sm={10}>
-                                <Form.Control as="select" onChange={this.handleDropdownChange}>
+                                <Form.Control as="select" value={this.state.lobbyName}
+                                              onChange={this.handleDropdownChange}>
                                     {this.state && this.state.rooms && this.state.rooms.map(room =>
                                         <option value={room.name} key={room.name}>{room.name}</option>
                                     )}
