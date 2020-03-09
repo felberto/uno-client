@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import socketInstance from "../../util/Socket";
 import {Button} from "react-bootstrap";
+import {withRouter} from "react-router-dom";
 
 class Game extends Component {
 
@@ -28,4 +29,4 @@ class Game extends Component {
     }
 }
 
-export default Game;
+export default withRouter(Game);
