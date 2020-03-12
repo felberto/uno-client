@@ -11,7 +11,7 @@ class JoinLobbyModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            lobbyName: undefined,
+            lobbyName: '',
             userName: '',
             rooms: []
         };
@@ -64,6 +64,7 @@ class JoinLobbyModal extends React.Component {
     }
 
     render() {
+        console.log(this.state.rooms);
         return (
             <Modal
                 show={this.props.show}
@@ -85,6 +86,7 @@ class JoinLobbyModal extends React.Component {
                             <Col sm={10}>
                                 <Form.Control as="select" value={this.state.lobbyName}
                                               onChange={this.handleDropdownChange}>
+                                    <option>...</option>
                                     {this.state && this.state.rooms && this.state.rooms.map(room =>
                                         <option value={room.name} key={room.name}>{room.name}</option>
                                     )}
