@@ -1,0 +1,34 @@
+.background-red {
+    background-color: lightgray;
+}
+
+.cardDeck {
+    display: inline-block;
+}
+
+.gameCard {
+    width: 8em;
+    margin: 0.5em;
+    padding: 0.5em;
+    border: solid white 0.5em;
+    border-radius: 0.5em;
+    display: inline-block;
+}
+
+.card-middle {
+    font-size: 5em;
+    text-align: center;
+}
+
+.card-bottom {
+    /* text upside down? */
+    text-align: right;
+}
+
+.avatar {
+    display: inline-block;
+}
+
+.avatar > p {
+    text-align: center;
+}
