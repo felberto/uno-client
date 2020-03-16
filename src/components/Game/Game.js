@@ -35,33 +35,36 @@ class Game extends Component {
         return (
             <div className="background-red">
                 <Row>
-                    <Col lg={2}></Col>
+                    <Col lg={2}/>
                     <Col>
                         <Avatar name="Player 1"/>
                     </Col>
-                    <Col lg={2}></Col>
+                    <Col lg={2}>
+                        <Button variant="dark" onClick={this.leaveLobby}>Lobby verlassen</Button>
+                    </Col>
                 </Row>
                 <Row>
                     <Col lg="2">
-                        <Avatar name="Player 2"></Avatar>
+                        <Avatar name="Player 2"/>
                     </Col>
                     <Col>
 
                     </Col>
                     <Col lg="2">
-                        <Avatar name="Player 3"></Avatar>
+                        <Avatar name="Player 3"/>
                     </Col>
                 </Row>
                 <Row>
-                    <Col lg="2"></Col>
+                    <Col lg="2"/>
                     <Col>
-                        <Avatar name="Meli"></Avatar>
-                        <CardDeck className="cardDeck" deck={cards}/>
-                        <Button>UNO!</Button>
+                        <Avatar name="Meli"/>
+                        <CardDeck
+                            className="cardDeck"
+                            deck={cards}
+                        />
+                        <Button variant="danger">UNO!</Button>
                     </Col>
-                    <Col lg="2">
-                        <Button onClick={this.leaveLobby}>Lobby verlassen</Button>
-                    </Col>
+                    <Col lg="2"/>
                 </Row>
             </div>
         )

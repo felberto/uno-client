@@ -6,13 +6,29 @@
     display: inline-block;
 }
 
-.gameCard {
+.gameCardFrontFirst {
     width: 8em;
-    margin: 0.5em;
     padding: 0.5em;
     border: solid white 0.5em;
     border-radius: 0.5em;
     display: inline-block;
+    box-shadow: -0.25em 0 0.5em black;
+}
+
+.gameCardFront {
+    width: 3em;
+    padding: 0.5em;
+    border-left: solid white 0.5em;
+    border-top: solid white 0.5em;
+    border-bottom: solid white 0.5em;
+    border-bottom-left-radius: 0.5em;
+    border-top-left-radius: 0.5em;
+    display: inline-block;
+    box-shadow: -0.25em 0 0.5em black;
+}
+
+.card-top {
+    text-align: left;
 }
 
 .card-middle {
