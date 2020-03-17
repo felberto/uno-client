@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import socketInstance from "../../util/Socket";
 import {Button, Col, Image, Row} from "react-bootstrap";
 import {withRouter} from "react-router-dom";
+import '../../game-style.css';
 
 class Game extends Component {
 
@@ -48,10 +49,10 @@ class Game extends Component {
                     <Col lg="2"/>
                     <Col>
                         <Avatar name="Meli"/>
-                        <CardDeck
-                            className="cardDeck"
-                            deck={cards}
-                        />
+                        {/*<CardDeck*/}
+                        {/*    className="cardDeck"*/}
+                        {/*    deck={this.state.roomData}*/}
+                        {/*/>*/}
                         <Button variant="danger">UNO!</Button>
                     </Col>
                     <Col lg="2"/>

@@ -26,8 +26,8 @@ class CardDeck extends Component {
                                            onClick={() => this.cardClickedHandler(card)}
                                            style={{backgroundColor: card.color}}
                                            key={index}>
-                                <div className="card-top">{card.number}</div>
-                                <div className="card-middle">{card.number}</div>
+                                <div className="card-top-first">{card.number}</div>
+                                <div className="card-middle-first">{card.number}</div>
                                 <div className="card-bottom">{card.number}</div>
                             </button>
                         } else {
@@ -36,8 +36,6 @@ class CardDeck extends Component {
                                            style={{backgroundColor: card.color}}
                                            key={index}>
                                 <div className="card-top">{card.number}</div>
-                                <div className="card-middle" style={{color: card.color}}>{card.number}</div>
-                                <div className="card-bottom" style={{color: card.color}}>{card.number}</div>
                             </button>
                         }
                     }
