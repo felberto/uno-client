@@ -57,7 +57,7 @@ class JoinLobbyModal extends React.Component {
         event.preventDefault();
         if (socketInstance.socket.emit('joinRoom', this.state.lobbyName, this.state.userName)) {
             this.handleReset();
-            this.props.history.push('/game');
+            this.props.history.push('/lobby');
         } else {
             return false;
         }

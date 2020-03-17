@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import socketInstance from "../../util/Socket";
-import {Button} from "react-bootstrap";
 import {withRouter} from "react-router-dom";
 
 class Game extends Component {
@@ -10,21 +9,9 @@ class Game extends Component {
         this.state = {
             roomData: {}
         };
-        this.startGame = this.startGame.bind(this);
-        this.leaveLobby = this.leaveLobby.bind(this);
     }
 
     componentDidMount() {
-        socketInstance.socket.emit('getRoomData');
-        socketInstance.socket.on('roomData', (data) => {
-            this.setState({
-                roomData: data
-            });
-            console.log(data);
-        });
-    }
-
-    startGame() {
         socketInstance.socket.emit('startGame', this.state.roomData.name);
         socketInstance.socket.on('roomData', (data) => {
             this.setState({
@@ -33,21 +20,9 @@ class Game extends Component {
         });
     }
 
-    leaveLobby() {
-        if (socketInstance.socket.emit('leaveRoom')) {
-            console.log('client: left game');
-            this.props.history.push('/');
-        } else {
-            console.log('could not leave room');
-            return false;
-        }
-    }
-
     render() {
         return (
             <div>
-                <Button onClick={this.leaveLobby}>Lobby verlassen</Button>
-                <Button onClick={this.startGame}>Start</Button>
             </div>
         )
     }
