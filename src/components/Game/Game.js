@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import socketInstance from "../../util/Socket";
-import Button from "react-bootstrap/Button";
+import {Button} from "react-bootstrap";
+import {withRouter} from "react-router-dom";
 
 class Game extends Component {
 
@@ -10,6 +11,7 @@ class Game extends Component {
             roomData: {}
         };
         this.startGame = this.startGame.bind(this);
+        this.leaveLobby = this.leaveLobby.bind(this);
     }
 
     componentDidMount() {
@@ -31,13 +33,24 @@ class Game extends Component {
         });
     }
 
+    leaveLobby() {
+        if (socketInstance.socket.emit('leaveRoom')) {
+            console.log('client: left game');
+            this.props.history.push('/');
+        } else {
+            console.log('could not leave room');
+            return false;
+        }
+    }
+
     render() {
         return (
             <div>
+                <Button onClick={this.leaveLobby}>Lobby verlassen</Button>
                 <Button onClick={this.startGame}>Start</Button>
             </div>
         )
     }
 }
 
-export default Game;
+export default withRouter(Game);
