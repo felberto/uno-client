@@ -48,4 +48,4 @@ class Lobby extends Component {
     }
 }
 
-export default withRouter(Game);
+export default withRouter(Lobby);
