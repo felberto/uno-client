@@ -9,16 +9,23 @@ class Game extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            roomData: {}
+            name: {},
+            playing: {},
+            users: [],
+            deck: []
         };
     }
 
     componentDidMount() {
-        socketInstance.socket.emit('startGame', this.state.roomData.name);
+        socketInstance.socket.emit('getRoomData');
         socketInstance.socket.on('roomData', (data) => {
             this.setState({
-                roomData: data
+                name: data.name,
+                playing: data.playing,
+                users: data.users,
+                deck: data.deck
             });
+            console.log(data);
         });
     }
 

@@ -43,7 +43,7 @@ class CreateLobbyModal extends React.Component {
         event.preventDefault();
         if (socketInstance.socket.emit('createRoom', this.state.roomName, this.state.userName)) {
             this.handleReset();
-            this.props.history.push('/game');
+            this.props.history.push('/lobby');
         } else {
             return false;
         }
