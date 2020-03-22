@@ -23,10 +23,12 @@ class Game extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: true,
             name: {},
             playing: {},
             users: [],
-            deck: []
+            deck: [],
+            ownUser: {},
         };
     }
 
@@ -34,6 +36,7 @@ class Game extends Component {
         socketInstance.socket.emit('getRoomData');
         socketInstance.socket.on('roomData', (data) => {
             this.setState({
+                loading: false,
                 name: data.name,
                 playing: data.playing,
                 users: data.users,
@@ -41,45 +44,71 @@ class Game extends Component {
             });
             console.log(data);
         });
+        console.log(socketInstance.socket.id);
+    }
+
+    getUser() {
+        for (let i = 0; i < this.state.users.length; ++i) {
+            if (this.state.users[i].user === socketInstance.socket.id) {
+                return this.state.users[i].username;
+            }
+        }
+    }
+
+    getCards() {
+        for (let i = 0; i < this.state.users.length; ++i) {
+            if (this.state.users[i].user === socketInstance.socket.id) {
+                console.log(this.state.users[i]);
+                console.log(this.state.users[i]['cards'].length);
+                console.log(this.state.users[i]['cards']);
+                return this.state.users[i]['cards'];
+            }
+        }
     }
 
     render() {
-        return (
-            <div className="background-red">
-                <Row>
-                    <Col lg={2}/>
-                    <Col>
-                        <Avatar name="Player 1"/>
-                    </Col>
-                    <Col lg={2}>
-                        {/*<Button variant="dark" onClick={this.leaveLobby}>Lobby verlassen</Button>*/}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col lg="2">
-                        <Avatar name="Player 2"/>
-                    </Col>
-                    <Col>
+        console.log(this.state.loading);
+        if (!this.state.loading) {
+            return (
+                <div className="background-red">
+                    <Row>
+                        <Col lg={2}/>
+                        <Col>
+                            <Avatar name="Player 1"/>
+                        </Col>
+                        <Col lg={2}>
+                            {/*<Button variant="dark" onClick={this.leaveLobby}>Lobby verlassen</Button>*/}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col lg="2">
+                            <Avatar name="Player 2"/>
+                        </Col>
+                        <Col>
 
-                    </Col>
-                    <Col lg="2">
-                        <Avatar name="Player 3"/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col lg="2"/>
-                    <Col>
-                        <Avatar name="Meli"/>
-                        <CardDeck
-                            className="cardDeck"
-                            deck={list}
-                        />
-                        <Button variant="danger">UNO!</Button>
-                    </Col>
-                    <Col lg="2"/>
-                </Row>
-            </div>
-        )
+                        </Col>
+                        <Col lg="2">
+                            <Avatar name="Player 3"/>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col lg="2"/>
+                        <Col>
+                            <Avatar name={this.getUser()}/>
+                            <CardDeck
+                                className="cardDeck"
+                                deck={this.getCards()}
+                            />
+                            <Button variant="danger">UNO!</Button>
+                        </Col>
+                        <Col lg="2"/>
+                    </Row>
+                </div>
+            )
+        } else {
+            return (<div>Loading...</div>)
+        }
+
     }
 }
 

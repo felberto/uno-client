@@ -19,7 +19,7 @@ class CardDeck extends Component {
 
     getCard(card, index, first) {
         if(card.color !== "black"){
-            console.log(`${card.color} ${card.number} ${card.action}`)
+            console.log(`${card.color} ${card.number} ${card.action}`);
             if(card.number !== null){
                 return <CardColorNumber card={card} key={index} isFirst={first}/>;
             } else {
