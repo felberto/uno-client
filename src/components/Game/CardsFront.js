@@ -1,9 +1,12 @@
 import React, {Component} from "react";
 import {withRouter} from "react-router-dom";
 import {ReactComponent as ArrowIcon} from "../../arrowIcon.svg";
-import {ReactComponent as CardsIcon} from "../../cardsIcon.svg";
+import {ReactComponent as Draw2Icon} from "../../draw2Icon.svg";
+import {ReactComponent as SuspendIcon} from "../../suspendIcon.svg";
+import {ReactComponent as Draw4Icon} from "../../draw4Icon.svg";
+import {ReactComponent as ColorIcon} from "../../colorIcon.svg";
 
-class CardDeck extends Component {
+class CardsFront extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -18,16 +21,10 @@ class CardDeck extends Component {
     }
 
     getCard(card, index, first) {
-        if(card.color !== "black"){
-            console.log(`${card.color} ${card.number} ${card.action}`);
-            if(card.number !== null){
-                return <CardColorNumber card={card} key={index} isFirst={first}/>;
-            } else {
-                return <CardColorSpecial card={card} key={index} isFirst={first}/>;
-            }
+        if(card.number !== null){
+            return <CardColorNumber card={card} key={index} isFirst={first}/>;
         } else {
-            console.log(`${card.color} ${card.number}  ${card.action}`);
-            // todo: black cards
+            return <CardSpecial card={card} key={index} isFirst={first}/>;
         }
     }
 
@@ -66,26 +63,47 @@ function CardColorNumber(props) {
     }
 }
 
-function CardColorSpecial (props) {
+function CardSpecial (props) {
     if (props.isFirst === true) {
         return <button className="gameCardFrontFirst"
                 onClick={() => this.cardClickedHandler(props.card)}
                 style={{backgroundColor: props.card.color}}>
                 <div className="card-top-first">
                     {props.card.action === "draw2" && '+2'}
+                    {props.card.action === "draw4" && '+4'}
                     {props.card.action === "return" && <ArrowIcon style={{width: '1.3em', height: '1.3em'}}/>}
+                    {props.card.action === "suspend" && <SuspendIcon style={{width: '1.3em', height: '1.3em'}}/>}
+                    {props.card.action === "changeColor" && <ColorIcon style={{width: '1.3em', height: '1.3em'}}/>}
                 </div>
                 <div className="card-middle-img">
-                    {props.card.action === "draw2" && <CardsIcon/>}
+                    {props.card.action === "draw2" && <Draw2Icon/>}
+                    {props.card.action === "draw4" && <Draw4Icon/>}
                     {props.card.action === "return" && <ArrowIcon/>}
+                    {props.card.action === "suspend" && <SuspendIcon/>}
+                    {props.card.action === "changeColor" && <ColorIcon/>}
                 </div>
                 <div className="card-bottom">
                     {props.card.action === "draw2" && '+2'}
+                    {props.card.action === "draw4" && '+4'}
                     {props.card.action === "return" && <ArrowIcon style={{width: '1.3em', height: '1.3em'}}/>}
+                    {props.card.action === "suspend" && <SuspendIcon style={{width: '1.3em', height: '1.3em'}}/>}
+                    {props.card.action === "changeColor" && <ColorIcon style={{width: '1.3em', height: '1.3em'}}/>}
                 </div>
         </button>;
     }
-    // todo: if not first card
+    else {
+        return <button className="gameCardFront"
+                       onClick={() => this.cardClickedHandler(props.card)}
+                       style={{backgroundColor: props.card.color}}>
+            <div className="card-top">
+                {props.card.action === "draw2" && '+2'}
+                {props.card.action === "draw4" && '+4'}
+                {props.card.action === "return" && <ArrowIcon style={{width: '1.3em', height: '1.3em'}}/>}
+                {props.card.action === "suspend" && <SuspendIcon style={{width: '1.3em', height: '1.3em'}}/>}
+                {props.card.action === "changeColor" && <ColorIcon style={{width: '1.3em', height: '1.3em'}}/>}
+            </div>
+        </button>;
+    }
 }
 
-export default withRouter(CardDeck);
+export default withRouter(CardsFront);

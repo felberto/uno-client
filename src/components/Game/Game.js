@@ -3,20 +3,8 @@ import socketInstance from "../../util/Socket";
 import {Button, Col, Image, Row} from "react-bootstrap";
 import {withRouter} from "react-router-dom";
 import '../../game-style.css';
-import CardDeck from './CardDeck';
-
-// test variable for CardDeck
-const list = [
-    {"color": "red", "number": 0, "action": null},
-    {"color": "green", "number": 3, "action": null},
-    {"color": "blue", "number": 5, "action": null},
-    {"color": "yellow", "number": 7, "action": null},
-    // {"color": "red", "number": null, "action": "draw2" },
-    // {"color": "green", "number": 7, "action": "suspend" },
-    {"color": "blue", "number": null, "action": "return"},
-    // {"color": "black", "number": null, "action": "draw4" },
-    // {"color": "black", "number": null, "action": "changeColor" }
-];
+import CardsFront from './CardsFront';
+import CardsBack from "./CardsBack";
 
 class Game extends Component {
 
@@ -55,6 +43,10 @@ class Game extends Component {
         }
     }
 
+    getOtherUsers() {
+        return this.state.users.filter(item => item.user !== socketInstance.socket.id);
+    }
+
     getCards() {
         for (let i = 0; i < this.state.users.length; ++i) {
             if (this.state.users[i].user === socketInstance.socket.id) {
@@ -68,34 +60,51 @@ class Game extends Component {
 
     render() {
         console.log(this.state.loading);
+        const count = this.state.users.length;
         if (!this.state.loading) {
             return (
                 <div className="background-red">
                     <Row>
                         <Col lg={2}/>
                         <Col>
-                            <Avatar name="Player 1"/>
+                            {/* Opponent 1*/}
+                            {count >= 2 && <Avatar name={this.getOtherUsers()[0].username}/>}
+                            {count >= 2 && <CardsBack
+                                className="cardDeck"
+                                count={this.getOtherUsers()[0]['cards'].length}/>}
                         </Col>
                         <Col lg={2}>
-                            {/*<Button variant="dark" onClick={this.leaveLobby}>Lobby verlassen</Button>*/}
+                            {/*Todo: Spiel beenden?
+                            <Button variant="dark" onClick={this.leaveLobby}>Lobby verlassen</Button>*/}
                         </Col>
                     </Row>
                     <Row>
-                        <Col lg="2">
-                            <Avatar name="Player 2"/>
+                        <Col lg="3">
+                            {/* Opponent 2 */}
+                            {count >= 3 && <Avatar name={this.getOtherUsers()[1].username}/>}
+                            {count >= 3 && <CardsBack
+                                className="cardDeck"
+                                style={{display: 'block'}}
+                                count={this.getOtherUsers()[1]['cards'].length}/>}
                         </Col>
                         <Col>
-
+                            {/* Todo: Deck here */}
+                            <p>Stapel und Ablagestapel hier</p>
                         </Col>
-                        <Col lg="2">
-                            <Avatar name="Player 3"/>
+                        <Col lg="3">
+                            {/* Opponent 3 */}
+                            {count >= 4 && <Avatar name={this.getOtherUsers()[2].username}/>}
+                            {count >= 4 && <CardsBack
+                                className="cardDeck"
+                                style={{display: 'block'}}
+                                count={this.getOtherUsers()[2]['cards'].length}/>}
                         </Col>
                     </Row>
                     <Row>
                         <Col lg="2"/>
                         <Col>
                             <Avatar name={this.getUser()}/>
-                            <CardDeck
+                            <CardsFront
                                 className="cardDeck"
                                 deck={this.getCards()}
                             />
