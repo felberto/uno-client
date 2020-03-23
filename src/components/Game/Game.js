@@ -6,6 +6,8 @@ import '../../game-style.css';
 import CardsFront from './CardsFront';
 import CardsBack from "./CardsBack";
 
+const test = {color: "green", number: null, action: "suspend"};
+
 class Game extends Component {
 
     constructor(props) {
@@ -88,8 +90,12 @@ class Game extends Component {
                                 count={this.getOtherUsers()[1]['cards'].length}/>}
                         </Col>
                         <Col>
-                            {/* Todo: Deck here */}
-                            <p>Stapel und Ablagestapel hier</p>
+                            {/* pass card here */}
+                            <CardsFront
+                                deck={Array.of(test)}
+                                isDisabled={true}
+                            />
+
                         </Col>
                         <Col lg="3">
                             {/* Opponent 3 */}
@@ -107,6 +113,7 @@ class Game extends Component {
                             <CardsFront
                                 className="cardDeck"
                                 deck={this.getCards()}
+                                isDisabled={false}
                             />
                             <Button variant="danger">UNO!</Button>
                         </Col>
