@@ -89,13 +89,13 @@ class Game extends Component {
                                 style={{display: 'block'}}
                                 count={this.getOtherUsers()[1]['cards'].length}/>}
                         </Col>
-                        <Col>
+                        <Col style={{marginTop: '1em', marginBottom: '1em'}}>
                             {/* pass card here */}
                             <CardsFront
                                 deck={Array.of(test)}
                                 isDisabled={true}
                             />
-
+                            <Deck/>
                         </Col>
                         <Col lg="3">
                             {/* Opponent 3 */}
@@ -134,5 +134,13 @@ const Avatar = ({name}) =>
                alt="Betnutzer Icon"/>
         <p>{name}</p>
     </div>;
+
+const Deck = () => {
+    return <div className="cardDeck">
+        <button className="deck">
+            <p>UNO</p>
+        </button>
+    </div>
+};
 
 export default withRouter(Game);
