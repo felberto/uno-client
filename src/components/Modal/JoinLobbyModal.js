@@ -88,7 +88,7 @@ class JoinLobbyModal extends React.Component {
                                               onChange={this.handleDropdownChange}>
                                     <option>...</option>
                                     {this.state && this.state.rooms && this.state.rooms.map(room =>
-                                        <option value={room.name} key={room.name}>{room.name}</option>
+                                        <option value={room} key={room}>{room}</option>
                                     )}
                                 </Form.Control>
                             </Col>

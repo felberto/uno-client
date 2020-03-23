@@ -1,0 +1,99 @@
+.background-red {
+    background-color: lightgray;
+}
+
+.cardDeck {
+    display: inline-block;
+    -webkit-text-fill-color: white;
+}
+
+.gameCardFrontFirst {
+    width: 8em;
+    min-width: 10em;
+    padding: 0.5em;
+    border: solid white 0.5em;
+    border-radius: 0.5em;
+    display: inline-block;
+    box-shadow: -0.25em 0 0.5em black;
+    text-shadow: -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+/* Front Cards, half, behind the first card */
+.gameCardFront {
+    width: 3em;
+    padding: 0.5em;
+    border-left: solid white 0.5em;
+    border-top: solid white 0.5em;
+    border-bottom: solid white 0.5em;
+    border-bottom-left-radius: 0.5em;
+    border-top-left-radius: 0.5em;
+    display: inline-block;
+    box-shadow: -0.25em 0 0.5em black;
+    text-shadow: -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+/* Content of the card - Numbers etc. */
+.card-top-first {
+    text-align: left;
+    font-size: 1.5em;
+}
+
+.card-top {
+    padding-bottom: 7em;
+    font-size: 1.5em;
+}
+
+.card-middle-first {
+    font-size: 5.6em;
+    text-align: center;
+}
+
+.card-middle-img {
+    padding-top: 1.1em;
+    padding-bottom: 1.1em;
+}
+
+.card-bottom {
+    /* text upside down? */
+    text-align: right;
+    font-size: 1.5em;
+}
+
+/* Back of the cards */
+.gameCardBackFirst {
+    height: 5em;
+    padding: 0.5em;
+    background-color: black;
+    border: solid white 0.3em;
+    border-radius: 0.5em;
+    display: inline-block;
+    color: white;
+    box-shadow: -0.25em 0 0.5em black;
+}
+
+.gameCardBack {
+    background-color: black;
+    padding: 0.5em 0 1.4em 0.5em;
+    border-left: solid white 0.3em;
+    border-top: solid white 0.3em;
+    border-bottom: solid white 0.3em;
+    border-bottom-left-radius: 0.5em;
+    border-top-left-radius: 0.5em;
+    display: inline-block;
+    color: white;
+    box-shadow: -0.25em 0 0.5em black;
+}
+
+.avatar {
+    display: inline-block;
+}
+
+.avatar > p {
+    text-align: center;
+}
