@@ -67,20 +67,32 @@ class Lobby extends Component {
             console.log(data);
         });
 
+        let startGameButton;
+        if (this.state.users.length >= 2 && this.state.users.length <= 4) {
+            startGameButton = <Button onClick={this.clickStart}>Start</Button>
+        } else {
+            startGameButton = <Button disabled={true} onClick={this.clickStart}>Start</Button>
+        }
+
         return (
             <div>
-                <Button onClick={this.leaveLobby}>Lobby verlassen</Button>
-                <Button onClick={this.clickStart}>Start</Button>
+                <div style={{width: '100vh', height: '80vh', margin: '0 auto', padding: '10%'}}>
+                    <p>{this.state.users.length}/4 Players in Lobby</p>
+                    <ul>{
+                        this.state.users.map((user) => {
+                            return (
+                                <ol key={user.user}>
+                                    {user.username}
+                                </ol>
+                            );
+                        })
+                    }</ul>
 
-                <ul>{
-                    this.state.users.map((user) => {
-                        return (
-                            <li key={user.user}>
-                                {user.username}
-                            </li>
-                        );
-                    })
-                }</ul>
+                    <br/>
+                    <Button onClick={this.leaveLobby}>Lobby verlassen</Button>
+                    {startGameButton}
+
+                </div>
             </div>
         )
     }
