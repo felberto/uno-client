@@ -6,8 +6,6 @@ import '../../game-style.css';
 import CardsFront from './CardsFront';
 import CardsBack from "./CardsBack";
 
-const test = {color: "green", number: null, action: "suspend"};
-
 class Game extends Component {
 
     constructor(props) {
@@ -19,6 +17,7 @@ class Game extends Component {
             users: [],
             deck: [],
             ownUser: {},
+            stack: {}
         };
     }
 
@@ -30,7 +29,8 @@ class Game extends Component {
                 name: data.name,
                 playing: data.playing,
                 users: data.users,
-                deck: data.deck
+                deck: data.deck,
+                stack: data.stack
             });
             console.log(data);
         });
@@ -67,15 +67,16 @@ class Game extends Component {
             return (
                 <div className="background-red">
                     <Row>
-                        <Col lg={2}/>
-                        <Col>
+                        <Col lg={3}/>
+                        <Col style={{textAlign: 'center'}}>
                             {/* Opponent 1*/}
                             {count >= 2 && <Avatar name={this.getOtherUsers()[0].username}/>}
                             {count >= 2 && <CardsBack
+                                style={{textAlign: 'center'}}
                                 className="cardDeck"
                                 count={this.getOtherUsers()[0]['cards'].length}/>}
                         </Col>
-                        <Col lg={2}>
+                        <Col lg={3}>
                             {/*Todo: Spiel beenden?
                             <Button variant="dark" onClick={this.leaveLobby}>Lobby verlassen</Button>*/}
                         </Col>
@@ -89,12 +90,13 @@ class Game extends Component {
                                 style={{display: 'block'}}
                                 count={this.getOtherUsers()[1]['cards'].length}/>}
                         </Col>
-                        <Col style={{marginTop: '1em', marginBottom: '1em'}}>
-                            {/* pass card here */}
+                        <Col lg={3} style={{marginTop: '1em', marginBottom: '1em', textAlign: 'right'}}>
                             <CardsFront
-                                deck={Array.of(test)}
+                                deck={Array.of(this.state.stack)}
                                 isDisabled={true}
                             />
+                        </Col>
+                        <Col lg={3} style={{marginTop: '1em', marginBottom: '1em', textAlign: 'left'}}>
                             <Deck/>
                         </Col>
                         <Col lg="3">
@@ -107,17 +109,17 @@ class Game extends Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col lg="2"/>
-                        <Col>
+                        <Col lg="3"/>
+                        <Col style={{textAlign: 'center'}}>
                             <Avatar name={this.getUser()}/>
                             <CardsFront
                                 className="cardDeck"
                                 deck={this.getCards()}
                                 isDisabled={false}
                             />
-                            <Button variant="danger">UNO!</Button>
+                            <Button className="alignBottom" variant="danger">UNO!</Button>
                         </Col>
-                        <Col lg="2"/>
+                        <Col lg="3"/>
                     </Row>
                 </div>
             )
@@ -129,7 +131,7 @@ class Game extends Component {
 }
 
 const Avatar = ({name}) =>
-    <div className="avatar">
+    <div className="avatar alignBottom">
         <Image src="https://img.icons8.com/material-sharp/48/000000/user.png"
                alt="Betnutzer Icon"/>
         <p>{name}</p>

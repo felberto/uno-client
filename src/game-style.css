@@ -5,6 +5,7 @@
 .cardDeck {
     display: inline-block;
     -webkit-text-fill-color: white;
+    margin: 0 0.5em;
 }
 
 .gameCardFrontFirst {
@@ -106,11 +107,6 @@
     border-radius: 0.5em;
     display: inline-block;
     box-shadow: -0.25em 0 0.5em black;
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
 }
 
 .deck > p {
@@ -124,4 +120,9 @@
 
 .avatar > p {
     text-align: center;
+}
+
+/* align content at the bottom */
+.alignBottom {
+    vertical-align: bottom;
 }
