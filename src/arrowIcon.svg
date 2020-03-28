@@ -6,7 +6,15 @@
        stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none"
        font-size="none" style="mix-blend-mode: normal">
         <path d="M0,172v-172h172v172z" stroke="none" stroke-width="1"></path>
-        <g stroke="#ffffff" stroke-width="13.76">
+        <g stroke="#000" stroke-width="20.76">
+            <path d="M17.2,65.36l88.44584,88.44584M106.64,116.96v37.84h-37.84M154.8,110.08l-89.44,-89.44M65.36,58.48v-37.84h37.84"></path>
+        </g>
+    </g>
+    <g fill="none" stroke="none" stroke-width="none"
+       stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+       font-size="none" style="mix-blend-mode: normal">
+        <path d="M0,172v-172h172v172z" stroke="none" stroke-width="1"></path>
+        <g stroke="#ffffff" stroke-width="14.76">
             <path d="M17.2,65.36l88.44584,88.44584M106.64,116.96v37.84h-37.84M154.8,110.08l-89.44,-89.44M65.36,58.48v-37.84h37.84"></path>
         </g>
     </g>

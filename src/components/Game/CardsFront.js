@@ -20,11 +20,19 @@ class CardsFront extends Component {
         this.setState({justClicked: card});
     }
 
-    getCard(card, index, first) {
-        if(card.number !== null){
-            return <CardColorNumber card={card} key={index} isFirst={first}/>;
+    getCard(card, index, first, isDisabled) {
+        if (card.number !== null) {
+            return <CardColorNumber
+                card={card}
+                key={index}
+                isFirst={first}
+                isDisabled={isDisabled}/>;
         } else {
-            return <CardSpecial card={card} key={index} isFirst={first}/>;
+            return <CardSpecial
+                card={card}
+                key={index}
+                isFirst={first}
+                isDisabled={isDisabled}/>;
         }
     }
 
@@ -34,9 +42,9 @@ class CardsFront extends Component {
             <div className="cardDeck">
                 {deck.map((card, index) => {
                         if (index === deck.length - 1) {
-                            return this.getCard(card, index, true);
+                            return this.getCard(card, index, true, this.props.isDisabled);
                         } else {
-                            return this.getCard(card, index, false);
+                            return this.getCard(card, index, false, this.props.isDisabled);
                         }
                     }
                 )}
@@ -49,16 +57,18 @@ function CardColorNumber(props) {
     if(props.isFirst === true) {
         return <button className="gameCardFrontFirst"
                        onClick={() => this.cardClickedHandler(props.card)}
-                       style={{backgroundColor: props.card.color}}>
-                <div className="card-top-first">{props.card.number}</div>
-                <div className="card-middle-first">{props.card.number}</div>
-                <div className="card-bottom">{props.card.number}</div>
+                       style={{backgroundColor: props.card.color}}
+                       disabled={props.isDisabled}>
+            <div className="card-top-first">{props.card.number}</div>
+            <div className="card-middle-first">{props.card.number}</div>
+            <div className="card-bottom">{props.card.number}</div>
         </button>;
     } else {
         return <button className="gameCardFront"
                        onClick={() => this.cardClickedHandler(props.card)}
-                       style={{backgroundColor: props.card.color}}>
-                <div className="card-top">{props.card.number}</div>
+                       style={{backgroundColor: props.card.color}}
+                       disabled={props.isDisabled}>
+            <div className="card-top">{props.card.number}</div>
         </button>;
     }
 }
@@ -66,18 +76,19 @@ function CardColorNumber(props) {
 function CardSpecial (props) {
     if (props.isFirst === true) {
         return <button className="gameCardFrontFirst"
-                onClick={() => this.cardClickedHandler(props.card)}
-                style={{backgroundColor: props.card.color}}>
-                <div className="card-top-first">
-                    {props.card.action === "draw2" && '+2'}
-                    {props.card.action === "draw4" && '+4'}
-                    {props.card.action === "return" && <ArrowIcon style={{width: '1.3em', height: '1.3em'}}/>}
-                    {props.card.action === "suspend" && <SuspendIcon style={{width: '1.3em', height: '1.3em'}}/>}
-                    {props.card.action === "changeColor" && <ColorIcon style={{width: '1.3em', height: '1.3em'}}/>}
-                </div>
-                <div className="card-middle-img">
-                    {props.card.action === "draw2" && <Draw2Icon/>}
-                    {props.card.action === "draw4" && <Draw4Icon/>}
+                       onClick={() => this.cardClickedHandler(props.card)}
+                       style={{backgroundColor: props.card.color}}
+                       disabled={props.isDisabled}>
+            <div className="card-top-first">
+                {props.card.action === "draw2" && '+2'}
+                {props.card.action === "draw4" && '+4'}
+                {props.card.action === "return" && <ArrowIcon style={{width: '1.3em', height: '1.3em'}}/>}
+                {props.card.action === "suspend" && <SuspendIcon style={{width: '1.3em', height: '1.3em'}}/>}
+                {props.card.action === "changeColor" && <ColorIcon style={{width: '1.3em', height: '1.3em'}}/>}
+            </div>
+            <div className="card-middle-img">
+                {props.card.action === "draw2" && <Draw2Icon/>}
+                {props.card.action === "draw4" && <Draw4Icon/>}
                     {props.card.action === "return" && <ArrowIcon/>}
                     {props.card.action === "suspend" && <SuspendIcon/>}
                     {props.card.action === "changeColor" && <ColorIcon/>}
@@ -94,7 +105,8 @@ function CardSpecial (props) {
     else {
         return <button className="gameCardFront"
                        onClick={() => this.cardClickedHandler(props.card)}
-                       style={{backgroundColor: props.card.color}}>
+                       style={{backgroundColor: props.card.color}}
+                       disabled={props.isDisabled}>
             <div className="card-top">
                 {props.card.action === "draw2" && '+2'}
                 {props.card.action === "draw4" && '+4'}
