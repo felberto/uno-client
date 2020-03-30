@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import socketInstance from "../../util/Socket";
 import {Button, Col, Image, Row} from "react-bootstrap";
 import {withRouter} from "react-router-dom";
-import '../../game-style.css';
+import './game-style.css';
 import CardsFront from './CardsFront';
 import CardsBack from "./CardsBack";
 

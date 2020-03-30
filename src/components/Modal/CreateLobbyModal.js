@@ -91,8 +91,8 @@ class CreateLobbyModal extends React.Component {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this.handleReset}>Abbrechen</Button>
-                    <Button form="createRoom" type={onsubmit}>Lobby erstellen</Button>
+                    <Button onClick={this.handleReset} variant="outline-dark">Abbrechen</Button>
+                    <Button form="createRoom" type={onsubmit} variant="dark">Lobby erstellen</Button>
                 </Modal.Footer>
             </Modal>
         );
