@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import socketInstance from "../../util/Socket";
-import {Button, Col, Image, Row} from "react-bootstrap";
+import {Col, Image, Row} from "react-bootstrap";
 import {withRouter} from "react-router-dom";
 import './game-style.css';
 import CardsFront from './CardsFront';
@@ -65,7 +65,7 @@ class Game extends Component {
         const count = this.state.users.length;
         if (!this.state.loading) {
             return (
-                <div className="background-red">
+                <div className="background-game" style={{height: window.innerHeight}}>
                     <Row>
                         <Col lg={3}/>
                         <Col style={{textAlign: 'center'}}>
@@ -117,7 +117,7 @@ class Game extends Component {
                                 deck={this.getCards()}
                                 isDisabled={false}
                             />
-                            <Button className="alignBottom" variant="danger">UNO!</Button>
+                            <button className="alignBottom uno-button">UNO!</button>
                         </Col>
                         <Col lg="3"/>
                     </Row>
@@ -134,7 +134,7 @@ const Avatar = ({name}) =>
     <div className="avatar alignBottom">
         <Image src="https://img.icons8.com/material-sharp/48/000000/user.png"
                alt="Betnutzer Icon"/>
-        <p>{name}</p>
+        <p style={{marginBottom: '0'}}>{name}</p>
     </div>;
 
 const Deck = () => {

@@ -64,7 +64,7 @@ class CreateLobbyModal extends React.Component {
                 </Modal.Header>
                 <Modal.Body>
                     <Form id="createRoom" onSubmit={this.createRoom}>
-                        <Form.Group as={Row} controlId="formHorizontalRoomName">
+                        <Form.Group as={Row} controlId="formHorizontalRoomName" style={{paddingBottom: '0.5em'}}>
                             <Form.Label column sm={2}>
                                 Lobby Name
                             </Form.Label>
