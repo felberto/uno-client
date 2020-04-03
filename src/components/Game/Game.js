@@ -68,7 +68,7 @@ class Game extends Component {
                 <div className="background-game" style={{height: window.innerHeight}}>
                     <Row>
                         <Col lg={3}/>
-                        <Col style={{textAlign: 'center'}}>
+                        <Col style={{textAlign: 'center', margin: '2em 0'}}>
                             {/* Opponent 1*/}
                             {count >= 2 && <Avatar name={this.getOtherUsers()[0].username}/>}
                             {count >= 2 && <CardsBack
@@ -90,13 +90,13 @@ class Game extends Component {
                                 style={{display: 'block'}}
                                 count={this.getOtherUsers()[1]['cards'].length}/>}
                         </Col>
-                        <Col lg={3} style={{marginTop: '1em', marginBottom: '1em', textAlign: 'right'}}>
+                        <Col lg={3} style={{marginTop: '2em', marginBottom: '3em', textAlign: 'right'}}>
                             <CardsFront
                                 deck={Array.of(this.state.stack)}
                                 isDisabled={true}
                             />
                         </Col>
-                        <Col lg={3} style={{marginTop: '1em', marginBottom: '1em', textAlign: 'left'}}>
+                        <Col lg={3} style={{marginTop: '2em', marginBottom: '3em', textAlign: 'left'}}>
                             <Deck/>
                         </Col>
                         <Col lg="3">
