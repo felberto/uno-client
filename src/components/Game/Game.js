@@ -16,7 +16,8 @@ class Game extends Component {
             playing: {},
             users: [],
             deck: [],
-            stack: {}
+            stack: {},
+            userTurn: {}
         };
     }
 
@@ -29,7 +30,8 @@ class Game extends Component {
                 playing: data.playing,
                 users: data.users,
                 deck: data.deck,
-                stack: data.stack
+                stack: data.stack,
+                userTurn: data.userTurn
             });
             console.log(data);
         });
@@ -61,7 +63,7 @@ class Game extends Component {
                         }
                     case 3:
                         let index3 = userid + 1;
-                        if (index3 === 2) {
+                        if (index3 === 3) {
                             index3 = 0;
                         }
                         for (let i = 0; i < this.state.users.length; ++i) {
@@ -151,7 +153,9 @@ class Game extends Component {
                         <Col lg={3}/>
                         <Col style={{textAlign: 'center'}}>
                             {/* Opponent 1*/}
-                            {count >= 2 &&
+                            {count >= 2 && this.state.userTurn === this.getOtherUsers(this.getUser().id, count, 'oben').id &&
+                            <AvatarActive name={this.getOtherUsers(this.getUser().id, count, 'oben').username}/>}
+                            {count >= 2 && this.state.userTurn !== this.getOtherUsers(this.getUser().id, count, 'oben').id &&
                             <Avatar name={this.getOtherUsers(this.getUser().id, count, 'oben').username}/>}
                             {count >= 2 && <CardsBack
                                 style={{textAlign: 'center'}}
@@ -166,17 +170,19 @@ class Game extends Component {
                     <Row>
                         <Col lg="3">
                             {/* Opponent 2 */}
-                            {count >= 3 &&
-                            <Avatar name={this.getOtherUsers(this.getUser().id, count, 'rechts').username}/>}
+                            {count >= 3 && this.state.userTurn === this.getOtherUsers(this.getUser().id, count, 'links').id &&
+                            <AvatarActive name={this.getOtherUsers(this.getUser().id, count, 'links').username}/>}
+                            {count >= 3 && this.state.userTurn !== this.getOtherUsers(this.getUser().id, count, 'links').id &&
+                            <Avatar name={this.getOtherUsers(this.getUser().id, count, 'links').username}/>}
                             {count >= 3 && <CardsBack
                                 className="cardDeck"
                                 style={{display: 'block'}}
-                                count={this.getOtherUsers(this.getUser().id, count, 'rechts')['cards'].length}/>}
+                                count={this.getOtherUsers(this.getUser().id, count, 'links')['cards'].length}/>}
                         </Col>
                         <Col lg={3} style={{marginTop: '1em', marginBottom: '1em', textAlign: 'right'}}>
                             <CardsFront
                                 deck={Array.of(this.state.stack)}
-                                isDisabled={true}
+                                isDisabled={this.state.userTurn === this.getUser().id}
                             />
                         </Col>
                         <Col lg={3} style={{marginTop: '1em', marginBottom: '1em', textAlign: 'left'}}>
@@ -184,22 +190,26 @@ class Game extends Component {
                         </Col>
                         <Col lg="3">
                             {/* Opponent 3 */}
-                            {count >= 4 &&
-                            <Avatar name={this.getOtherUsers(this.getUser().id, count, 'links').username}/>}
+                            {count >= 4 && this.state.userTurn === this.getOtherUsers(this.getUser().id, count, 'rechts').id &&
+                            <AvatarActive name={this.getOtherUsers(this.getUser().id, count, 'rechts').username}/>}
+                            {count >= 4 && this.state.userTurn !== this.getOtherUsers(this.getUser().id, count, 'rechts').id &&
+                            <Avatar name={this.getOtherUsers(this.getUser().id, count, 'rechts').username}/>}
                             {count >= 4 && <CardsBack
                                 className="cardDeck"
                                 style={{display: 'block'}}
-                                count={this.getOtherUsers(this.getUser().id, count, 'links')['cards'].length}/>}
+                                count={this.getOtherUsers(this.getUser().id, count, 'rechts')['cards'].length}/>}
                         </Col>
                     </Row>
                     <Row>
                         <Col lg="3"/>
                         <Col style={{textAlign: 'center'}}>
-                            <Avatar name={this.getUser().username}/>
+                            {this.state.userTurn === this.getUser().id &&
+                            <AvatarActive name={this.getUser().username}/>}
+                            {this.state.userTurn !== this.getUser().id && <Avatar name={this.getUser().username}/>}
                             <CardsFront
                                 className="cardDeck"
                                 deck={this.getCards()}
-                                isDisabled={false}
+                                isDisabled={this.state.userTurn !== this.getUser().id}
                             />
                             <Button className="alignBottom" variant="danger">UNO!</Button>
                         </Col>
@@ -217,8 +227,30 @@ class Game extends Component {
 const
     Avatar = ({name}) =>
         <div className="avatar alignBottom">
-            <Image src="https://img.icons8.com/material-sharp/48/000000/user.png"
-                   alt="Betnutzer Icon"/>
+            <Image src="https://img.icons8.com/material-sharp/64/000000/user.png"
+                   alt="User Icon"/>
+            <p>{name}</p>
+        </div>;
+
+const
+    AvatarActive = ({name}) =>
+        <div className="avatar alignBottom">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                 width="64" height="64"
+                 viewBox="0 0 172 172"
+                 style={{fill: '#000000'}}>
+                <g fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt"
+                   strokeLinejoin="miter"
+                   strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none"
+                   fontWeight="none"
+                   fontSize="none" textAnchor="none" style={{mixBlendMode: 'normal'}}>
+                    <path d="M0,172v-172h172v172z" fill="none"/>
+                    <g fill="#ff1700">
+                        <path
+                            d="M86,21.5c-15.83216,0 -28.66667,12.8345 -28.66667,28.66667c0,15.83216 12.8345,28.66667 28.66667,28.66667c15.83216,0 28.66667,-12.8345 28.66667,-28.66667c0,-15.83216 -12.8345,-28.66667 -28.66667,-28.66667zM86,100.33333c-21.52867,0 -64.5,10.80733 -64.5,32.25v17.91667h129v-17.91667c0,-21.44267 -42.97133,-32.25 -64.5,-32.25z"/>
+                    </g>
+                </g>
+            </svg>
             <p>{name}</p>
         </div>;
 
