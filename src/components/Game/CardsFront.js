@@ -9,15 +9,6 @@ import {ReactComponent as ColorIcon} from "../../colorIcon.svg";
 class CardsFront extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            justClicked: null,
-        };
-        this.cardClickedHandler = this.cardClickedHandler.bind(this);
-    }
-
-    cardClickedHandler(card) {
-        console.log(`card clicked: ${card.number} ${card.color}`);
-        this.setState({justClicked: card});
     }
 
     getCard(card, index, first, isDisabled) {
@@ -53,10 +44,15 @@ class CardsFront extends Component {
     }
 }
 
+function cardClickedHandler(card) {
+    console.log(`card clicked: ${card.number} ${card.color}`);
+    //ToDo: action for click card
+}
+
 function CardColorNumber(props) {
-    if(props.isFirst === true) {
+    if (props.isFirst === true) {
         return <button className="gameCardFrontFirst"
-                       onClick={() => this.cardClickedHandler(props.card)}
+                       onClick={() => cardClickedHandler(props.card)}
                        style={{backgroundColor: props.card.color}}
                        disabled={props.isDisabled}>
             <div className="card-top-first">{props.card.number}</div>
@@ -65,7 +61,7 @@ function CardColorNumber(props) {
         </button>;
     } else {
         return <button className="gameCardFront"
-                       onClick={() => this.cardClickedHandler(props.card)}
+                       onClick={() => cardClickedHandler(props.card)}
                        style={{backgroundColor: props.card.color}}
                        disabled={props.isDisabled}>
             <div className="card-top">{props.card.number}</div>
@@ -73,10 +69,10 @@ function CardColorNumber(props) {
     }
 }
 
-function CardSpecial (props) {
+function CardSpecial(props) {
     if (props.isFirst === true) {
         return <button className="gameCardFrontFirst"
-                       onClick={() => this.cardClickedHandler(props.card)}
+                       onClick={() => cardClickedHandler(props.card)}
                        style={{backgroundColor: props.card.color}}
                        disabled={props.isDisabled}>
             <div className="card-top-first">
@@ -89,22 +85,21 @@ function CardSpecial (props) {
             <div className="card-middle-img">
                 {props.card.action === "draw2" && <Draw2Icon/>}
                 {props.card.action === "draw4" && <Draw4Icon/>}
-                    {props.card.action === "return" && <ArrowIcon/>}
-                    {props.card.action === "suspend" && <SuspendIcon/>}
-                    {props.card.action === "changeColor" && <ColorIcon/>}
-                </div>
-                <div className="card-bottom">
-                    {props.card.action === "draw2" && '+2'}
-                    {props.card.action === "draw4" && '+4'}
-                    {props.card.action === "return" && <ArrowIcon style={{width: '1.3em', height: '1.3em'}}/>}
-                    {props.card.action === "suspend" && <SuspendIcon style={{width: '1.3em', height: '1.3em'}}/>}
-                    {props.card.action === "changeColor" && <ColorIcon style={{width: '1.3em', height: '1.3em'}}/>}
-                </div>
+                {props.card.action === "return" && <ArrowIcon/>}
+                {props.card.action === "suspend" && <SuspendIcon/>}
+                {props.card.action === "changeColor" && <ColorIcon/>}
+            </div>
+            <div className="card-bottom">
+                {props.card.action === "draw2" && '+2'}
+                {props.card.action === "draw4" && '+4'}
+                {props.card.action === "return" && <ArrowIcon style={{width: '1.3em', height: '1.3em'}}/>}
+                {props.card.action === "suspend" && <SuspendIcon style={{width: '1.3em', height: '1.3em'}}/>}
+                {props.card.action === "changeColor" && <ColorIcon style={{width: '1.3em', height: '1.3em'}}/>}
+            </div>
         </button>;
-    }
-    else {
+    } else {
         return <button className="gameCardFront"
-                       onClick={() => this.cardClickedHandler(props.card)}
+                       onClick={() => cardClickedHandler(props.card)}
                        style={{backgroundColor: props.card.color}}
                        disabled={props.isDisabled}>
             <div className="card-top">
