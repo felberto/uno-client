@@ -71,7 +71,7 @@ class JoinLobbyModal extends React.Component {
                 </Modal.Header>
                 <Modal.Body>
                     <Form id="createLobby" onSubmit={this.joinLobby}>
-                        <Form.Group as={Row} controlId="formHorizontalLobbyName">
+                        <Form.Group as={Row} controlId="formHorizontalLobbyName" style={{paddingBottom: '0.5em'}}>
                             <Form.Label column sm={2}>
                                 Lobby Name
                             </Form.Label>
@@ -100,8 +100,8 @@ class JoinLobbyModal extends React.Component {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this.handleReset}>Abbrechen</Button>
-                    <Button form="createLobby" type={onsubmit}>Lobby joinen</Button>
+                    <Button onClick={this.handleReset} variant="outline-dark">Abbrechen</Button>
+                    <Button form="createLobby" type={onsubmit} variant="dark">Lobby joinen</Button>
                 </Modal.Footer>
             </Modal>
         );

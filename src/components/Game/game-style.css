@@ -1,11 +1,13 @@
-.background-red {
-    background-color: lightgray;
+.background-game {
+    /* a bit more transparent */
+    background-image: radial-gradient(circle, #ffd400d1, #ff0000d1);
+    margin: 0;
 }
 
 .cardDeck {
     display: inline-block;
     -webkit-text-fill-color: white;
-    margin: 0 0.5em;
+    margin: 1em 1em 0 1em;
 }
 
 .gameCardFrontFirst {
@@ -125,4 +127,15 @@
 /* align content at the bottom */
 .alignBottom {
     vertical-align: bottom;
+}
+
+.uno-button {
+    color: #ffeb00;
+    font-size: 1.5em;
+    background-color: #ff2500;
+    border-color: #000000a8;
+    border-radius: 2em;
+    padding: 1em 0.5em;
+    box-shadow: -0.15em 0 0.25em black;
+    text-shadow: -0.08em 0.08em black
 }

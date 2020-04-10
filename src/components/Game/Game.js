@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {getData, getId} from "../../util/Socket";
 import {Button, Col, Image, Row} from "react-bootstrap";
 import {withRouter} from "react-router-dom";
-import '../../game-style.css';
+import './game-style.css';
 import CardsFront from './CardsFront';
 import CardsBack from "./CardsBack";
 
@@ -126,10 +126,10 @@ class Game extends Component {
         const count = this.state.users.length;
         if (!this.state.loading) {
             return (
-                <div className="background-red">
+                <div className="background-game" style={{height: window.innerHeight}}>
                     <Row>
                         <Col lg={3}/>
-                        <Col style={{textAlign: 'center'}}>
+                        <Col style={{textAlign: 'center', margin: '2em 0'}}>
                             {/* Opponent 1*/}
                             {count >= 2 && this.state.userTurn === this.getOtherUsers(this.getUser().id, count, 'oben').id &&
                             <AvatarActive name={this.getOtherUsers(this.getUser().id, count, 'oben').username}/>}
@@ -157,13 +157,13 @@ class Game extends Component {
                                 style={{display: 'block'}}
                                 count={this.getOtherUsers(this.getUser().id, count, 'links')['cards'].length}/>}
                         </Col>
-                        <Col lg={3} style={{marginTop: '1em', marginBottom: '1em', textAlign: 'right'}}>
+                        <Col lg={3} style={{marginTop: '2em', marginBottom: '3em', textAlign: 'right'}}>
                             <CardsFront
                                 deck={Array.of(this.state.stack)}
                                 isDisabled={this.state.userTurn === this.getUser().id}
                             />
                         </Col>
-                        <Col lg={3} style={{marginTop: '1em', marginBottom: '1em', textAlign: 'left'}}>
+                        <Col lg={3} style={{marginTop: '2em', marginBottom: '3em', textAlign: 'left'}}>
                             <Deck/>
                         </Col>
                         <Col lg="3">
@@ -189,7 +189,7 @@ class Game extends Component {
                                 deck={this.getCards()}
                                 isDisabled={this.state.userTurn !== this.getUser().id}
                             />
-                            <Button className="alignBottom" variant="danger">UNO!</Button>
+                            <button className="alignBottom uno-button">UNO!</button>
                         </Col>
                         <Col lg="3"/>
                     </Row>
@@ -207,7 +207,7 @@ const
         <div className="avatar alignBottom">
             <Image src="https://img.icons8.com/material-sharp/64/000000/user.png"
                    alt="User Icon"/>
-            <p>{name}</p>
+            <p style={{marginBottom: '0'}}>{name}</p>
         </div>;
 
 const
@@ -229,7 +229,7 @@ const
                     </g>
                 </g>
             </svg>
-            <p>{name}</p>
+            <p style={{marginBottom: '0'}}>>{name}</p>
         </div>;
 
 const

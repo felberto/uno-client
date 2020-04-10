@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import {Button} from "react-bootstrap";
 import {withRouter} from "react-router-dom";
 import {clickStart, getData, leaveLobby, redirectStart} from "../../util/Socket";
+import "../../global-style.css";
+import "./lobby-style.css";
 
 class Lobby extends Component {
 
@@ -45,27 +47,30 @@ class Lobby extends Component {
     render() {
         let startGameButton;
         if (this.state.users.length >= 2 && this.state.users.length <= 4) {
-            startGameButton = <Button onClick={this.clickStart}>Start</Button>
+            startGameButton = <Button onClick={this.clickStart} variant="dark">Start</Button>
         } else {
-            startGameButton = <Button disabled={true} onClick={this.clickStart}>Start</Button>
+            startGameButton = <Button disabled={true} onClick={this.clickStart} variant="dark">Start</Button>
         }
 
         return (
-            <div>
-                <div style={{width: '100vh', height: '80vh', margin: '0 auto', padding: '10%'}}>
-                    <p>{this.state.users.length}/4 Players in Lobby</p>
+            <div className="background row" style={{height: window.innerHeight}}>
+                <div className="col-md-6 center-horizontal-vertical">
+                    <p className="lobby-uno">UNO</p>
+                </div>
+                <div className="col-md-6 center-vertical">
+                    <h5>{this.state.users.length}/4 Players in Lobby</h5>
                     <ul>{
                         this.state.users.map((user) => {
                             return (
-                                <ol key={user.user}>
+                                <li key={user.user}>
                                     {user.username}
-                                </ol>
+                                </li>
                             );
                         })
                     }</ul>
 
-                    <br/>
-                    <Button onClick={this.leaveLobby}>Lobby verlassen</Button>
+                    <Button onClick={this.leaveLobby} variant="dark" style={{marginRight: '0.5em'}}>Lobby
+                        verlassen</Button>
                     {startGameButton}
 
                 </div>
