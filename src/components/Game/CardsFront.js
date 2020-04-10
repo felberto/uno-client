@@ -10,15 +10,6 @@ import {ReactComponent as ColorIcon} from "../../resources/svg/colorIcon.svg";
 class CardsFront extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            justClicked: null,
-        };
-        this.cardClickedHandler = this.cardClickedHandler.bind(this);
-    }
-
-    cardClickedHandler(card) {
-        console.log(`card clicked: ${card.number} ${card.color}`);
-        this.setState({justClicked: card});
     }
 
     getCard(card, index, first, isDisabled) {

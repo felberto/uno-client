@@ -37,8 +37,12 @@ function playCard(card) {
     socket.emit('playCard', card);
 }
 
+function getCard() {
+    socket.emit('getCard');
+}
+
 function getId() {
     return socket.id;
 }
 
-export {getData, getRooms, createRoom, joinRoom, clickStart, leaveLobby, redirectStart, playCard, getId};
+export {getData, getRooms, createRoom, joinRoom, clickStart, leaveLobby, redirectStart, playCard, getCard, getId};

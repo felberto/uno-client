@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {getData, getId} from "../../util/Socket";
+import {getCard, getData, getId} from "../../util/Socket";
 import {Col, Image, Row} from "react-bootstrap";
 import {withRouter} from "react-router-dom";
 import './game-style.css';
@@ -160,7 +160,7 @@ class Game extends Component {
                         <Col lg={3} style={{marginTop: '2em', marginBottom: '3em', textAlign: 'right'}}>
                             <CardsFront
                                 deck={Array.of(this.state.stack)}
-                                isDisabled={this.state.userTurn === this.getUser().id}
+                                isDisabled={false}
                             />
                         </Col>
                         <Col lg={3} style={{marginTop: '2em', marginBottom: '3em', textAlign: 'left'}}>
@@ -229,16 +229,20 @@ const
                     </g>
                 </g>
             </svg>
-            <p style={{marginBottom: '0'}}>>{name}</p>
+            <p style={{marginBottom: '0'}}>{name}</p>
         </div>;
 
 const
     Deck = () => {
         return <div className="cardDeck">
-            <button className="deck">
+            <button onClick={() => deckClickedHandler()} className="deck">
                 <p>UNO</p>
             </button>
         </div>
     };
+
+function deckClickedHandler() {
+    getCard();
+}
 
 export default withRouter(Game);
