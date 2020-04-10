@@ -1,0 +1,10 @@
+div.row {
+    margin: 0;
+}
+
+.home-uno {
+    margin: 0;
+    font-size: 13em;
+    color: #ffd400;
+    text-shadow: -11px 11px 0 #000;
+}
