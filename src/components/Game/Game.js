@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {getData, getId} from "../../util/Socket";
-import {Button, Col, Image, Row} from "react-bootstrap";
+import {Col, Image, Row} from "react-bootstrap";
 import {withRouter} from "react-router-dom";
 import './game-style.css';
 import CardsFront from './CardsFront';

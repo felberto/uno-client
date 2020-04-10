@@ -1,10 +1,5 @@
 import React, {Component} from "react";
 import {withRouter} from "react-router-dom";
-import {ReactComponent as ArrowIcon} from "../../arrowIcon.svg";
-import {ReactComponent as Draw2Icon} from "../../draw2Icon.svg";
-import {ReactComponent as SuspendIcon} from "../../suspendIcon.svg";
-import {ReactComponent as Draw4Icon} from "../../draw4Icon.svg";
-import {ReactComponent as ColorIcon} from "../../colorIcon.svg";
 import {playCard} from "../../util/Socket";
 import {ReactComponent as ArrowIcon} from "../../resources/svg/arrowIcon.svg";
 import {ReactComponent as Draw2Icon} from "../../resources/svg/draw2Icon.svg";
