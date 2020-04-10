@@ -5,6 +5,7 @@ import {ReactComponent as Draw2Icon} from "../../draw2Icon.svg";
 import {ReactComponent as SuspendIcon} from "../../suspendIcon.svg";
 import {ReactComponent as Draw4Icon} from "../../draw4Icon.svg";
 import {ReactComponent as ColorIcon} from "../../colorIcon.svg";
+import {playCard} from "../../util/Socket";
 
 class CardsFront extends Component {
     constructor(props) {
@@ -46,7 +47,7 @@ class CardsFront extends Component {
 
 function cardClickedHandler(card) {
     console.log(`card clicked: ${card.number} ${card.color}`);
-    //ToDo: action for click card
+    playCard(card);
 }
 
 function CardColorNumber(props) {

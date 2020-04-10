@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import {withRouter} from "react-router-dom";
-import socketInstance from "../../util/Socket";
+import {createRoom} from "../../util/Socket";
 
 class CreateLobbyModal extends React.Component {
 
@@ -41,12 +41,9 @@ class CreateLobbyModal extends React.Component {
 
     createRoom(event) {
         event.preventDefault();
-        if (socketInstance.socket.emit('createRoom', this.state.roomName, this.state.userName)) {
-            this.handleReset();
-            this.props.history.push('/lobby');
-        } else {
-            return false;
-        }
+        createRoom(this.state.roomName, this.state.userName);
+        this.handleReset();
+        this.props.history.push('/lobby');
     }
 
     render() {

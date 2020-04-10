@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import socketInstance from "../../util/Socket";
+import {getData, getId} from "../../util/Socket";
 import {Button, Col, Image, Row} from "react-bootstrap";
 import {withRouter} from "react-router-dom";
 import '../../game-style.css';
@@ -19,45 +19,33 @@ class Game extends Component {
             stack: {},
             userTurn: {}
         };
-    }
-
-    componentDidMount() {
-        socketInstance.socket.emit('getRoomData');
-        socketInstance.socket.on('roomData', (data) => {
-            this.setState({
-                loading: false,
-                name: data.name,
-                playing: data.playing,
-                users: data.users,
-                deck: data.deck,
-                stack: data.stack,
-                userTurn: data.userTurn
-            });
-            console.log(data);
-        });
-        console.log(socketInstance.socket.id);
+        console.log("constructor");
+        getData((err, data) => this.setState({
+            loading: false,
+            name: data.name,
+            playing: data.playing,
+            users: data.users,
+            deck: data.deck,
+            stack: data.stack,
+            userTurn: data.userTurn
+        }));
     }
 
     getUser() {
         for (let i = 0; i < this.state.users.length; ++i) {
-            if (this.state.users[i].user === socketInstance.socket.id) {
+            if (this.state.users[i].user === getId()) {
                 return this.state.users[i];
             }
         }
     }
 
     getOtherUsers(userid, count, position) {
-        console.log(userid);
-        console.log(count);
-        console.log(position);
-
         switch (position) {
             case 'oben':
                 switch (count) {
                     case 2:
                         for (let i = 0; i < this.state.users.length; ++i) {
                             if (this.state.users[i].id !== userid) {
-                                console.log(this.state.users[i]);
                                 return this.state.users[i];
                             }
                         }
@@ -68,7 +56,6 @@ class Game extends Component {
                         }
                         for (let i = 0; i < this.state.users.length; ++i) {
                             if (this.state.users[i].id === index3) {
-                                console.log(this.state.users[i]);
                                 return this.state.users[i];
                             }
                         }
@@ -81,7 +68,6 @@ class Game extends Component {
                         }
                         for (let i = 0; i < this.state.users.length; ++i) {
                             if (this.state.users[i].id === index4) {
-                                console.log(this.state.users[i]);
                                 return this.state.users[i];
                             }
                         }
@@ -93,7 +79,6 @@ class Game extends Component {
                 }
                 for (let i = 0; i < this.state.users.length; ++i) {
                     if (this.state.users[i].id === index) {
-                        console.log(this.state.users[i]);
                         return this.state.users[i];
                     }
                 }
@@ -108,7 +93,6 @@ class Game extends Component {
                         }
                         for (let i = 0; i < this.state.users.length; ++i) {
                             if (this.state.users[i].id === index3) {
-                                console.log(this.state.users[i]);
                                 return this.state.users[i];
                             }
                         }
@@ -123,28 +107,22 @@ class Game extends Component {
                         }
                         for (let i = 0; i < this.state.users.length; ++i) {
                             if (this.state.users[i].id === index4) {
-                                console.log(this.state.users[i]);
                                 return this.state.users[i];
                             }
                         }
                 }
-            //return this.state.users.filter(item => item.user !== socketInstance.socket.id);
         }
     }
 
     getCards() {
         for (let i = 0; i < this.state.users.length; ++i) {
-            if (this.state.users[i].user === socketInstance.socket.id) {
-                console.log(this.state.users[i]);
-                console.log(this.state.users[i]['cards'].length);
-                console.log(this.state.users[i]['cards']);
+            if (this.state.users[i].user === getId()) {
                 return this.state.users[i]['cards'];
             }
         }
     }
 
     render() {
-        console.log(this.state.loading);
         const count = this.state.users.length;
         if (!this.state.loading) {
             return (
