@@ -1,6 +1,6 @@
 import socketIOClient from "socket.io-client";
 //ToDo: change variable for different environment
-const socket = socketIOClient('http://localhost:8001/');
+const socket = socketIOClient(process.env.REACT_APP_SOCKET_IO_URL);
 
 function getData(data) {
     socket.emit('getRoomData');
