@@ -1,0 +1,15 @@
+.background {
+    background-image: radial-gradient(circle, #ffd400, #ff0000f2);
+    margin: 0;
+}
+
+.center-horizontal-vertical {
+    text-align: center;
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+.center-vertical {
+    margin-bottom: auto;
+    margin-top: auto;
+}

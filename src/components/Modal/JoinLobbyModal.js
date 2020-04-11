@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import {withRouter} from "react-router-dom";
-import socketInstance from "../../util/Socket";
+import {getRooms, joinRoom} from "../../util/Socket";
 
 class JoinLobbyModal extends React.Component {
     constructor(props) {
@@ -20,15 +20,10 @@ class JoinLobbyModal extends React.Component {
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
         this.handleReset = this.handleReset.bind(this);
         this.joinLobby = this.joinLobby.bind(this);
-    }
 
-    componentDidMount() {
-        socketInstance.socket.emit('getAllRooms');
-        socketInstance.socket.on('responseAllRooms', (rooms) => {
-            this.setState({
-                rooms: rooms
-            });
-        });
+        getRooms((err, data) => this.setState({
+            rooms: data
+        }));
     }
 
     handleInputChange(event) {
@@ -55,12 +50,9 @@ class JoinLobbyModal extends React.Component {
 
     joinLobby(event) {
         event.preventDefault();
-        if (socketInstance.socket.emit('joinRoom', this.state.lobbyName, this.state.userName)) {
-            this.handleReset();
-            this.props.history.push('/lobby');
-        } else {
-            return false;
-        }
+        joinRoom(this.state.lobbyName, this.state.userName);
+        this.handleReset();
+        this.props.history.push('/lobby');
     }
 
     render() {
@@ -79,7 +71,7 @@ class JoinLobbyModal extends React.Component {
                 </Modal.Header>
                 <Modal.Body>
                     <Form id="createLobby" onSubmit={this.joinLobby}>
-                        <Form.Group as={Row} controlId="formHorizontalLobbyName">
+                        <Form.Group as={Row} controlId="formHorizontalLobbyName" style={{paddingBottom: '0.5em'}}>
                             <Form.Label column sm={2}>
                                 Lobby Name
                             </Form.Label>
@@ -108,8 +100,8 @@ class JoinLobbyModal extends React.Component {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this.handleReset}>Abbrechen</Button>
-                    <Button form="createLobby" type={onsubmit}>Lobby joinen</Button>
+                    <Button onClick={this.handleReset} variant="outline-dark">Abbrechen</Button>
+                    <Button form="createLobby" type={onsubmit} variant="dark">Lobby joinen</Button>
                 </Modal.Footer>
             </Modal>
         );

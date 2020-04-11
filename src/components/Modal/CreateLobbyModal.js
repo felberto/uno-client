@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import {withRouter} from "react-router-dom";
-import socketInstance from "../../util/Socket";
+import {createRoom} from "../../util/Socket";
 
 class CreateLobbyModal extends React.Component {
 
@@ -41,12 +41,9 @@ class CreateLobbyModal extends React.Component {
 
     createRoom(event) {
         event.preventDefault();
-        if (socketInstance.socket.emit('createRoom', this.state.roomName, this.state.userName)) {
-            this.handleReset();
-            this.props.history.push('/lobby');
-        } else {
-            return false;
-        }
+        createRoom(this.state.roomName, this.state.userName);
+        this.handleReset();
+        this.props.history.push('/lobby');
     }
 
     render() {
@@ -64,7 +61,7 @@ class CreateLobbyModal extends React.Component {
                 </Modal.Header>
                 <Modal.Body>
                     <Form id="createRoom" onSubmit={this.createRoom}>
-                        <Form.Group as={Row} controlId="formHorizontalRoomName">
+                        <Form.Group as={Row} controlId="formHorizontalRoomName" style={{paddingBottom: '0.5em'}}>
                             <Form.Label column sm={2}>
                                 Lobby Name
                             </Form.Label>
@@ -91,8 +88,8 @@ class CreateLobbyModal extends React.Component {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this.handleReset}>Abbrechen</Button>
-                    <Button form="createRoom" type={onsubmit}>Lobby erstellen</Button>
+                    <Button onClick={this.handleReset} variant="outline-dark">Abbrechen</Button>
+                    <Button form="createRoom" type={onsubmit} variant="dark">Lobby erstellen</Button>
                 </Modal.Footer>
             </Modal>
         );
