@@ -161,7 +161,7 @@ class Game extends Component {
                         <Col lg={3} style={{marginTop: '2em', marginBottom: '3em', textAlign: 'right'}}>
                             <CardsFront
                                 deck={Array.of(this.state.stack)}
-                                isDisabled={false}
+                                isDisabled={true}
                             />
                         </Col>
                         <Col lg={3} style={{marginTop: '2em', marginBottom: '3em', textAlign: 'left'}}>
