@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import {withRouter} from "react-router-dom";
-import socketInstance from "../../util/Socket";
+import {getRooms, joinRoom} from "../../util/Socket";
 
 class JoinLobbyModal extends React.Component {
     constructor(props) {
@@ -20,15 +20,10 @@ class JoinLobbyModal extends React.Component {
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
         this.handleReset = this.handleReset.bind(this);
         this.joinLobby = this.joinLobby.bind(this);
-    }
 
-    componentDidMount() {
-        socketInstance.socket.emit('getAllRooms');
-        socketInstance.socket.on('responseAllRooms', (rooms) => {
-            this.setState({
-                rooms: rooms
-            });
-        });
+        getRooms((err, data) => this.setState({
+            rooms: data
+        }));
     }
 
     handleInputChange(event) {
@@ -55,12 +50,9 @@ class JoinLobbyModal extends React.Component {
 
     joinLobby(event) {
         event.preventDefault();
-        if (socketInstance.socket.emit('joinRoom', this.state.lobbyName, this.state.userName)) {
-            this.handleReset();
-            this.props.history.push('/lobby');
-        } else {
-            return false;
-        }
+        joinRoom(this.state.lobbyName, this.state.userName);
+        this.handleReset();
+        this.props.history.push('/lobby');
     }
 
     render() {
