@@ -5,6 +5,7 @@ import {withRouter} from "react-router-dom";
 import './game-style.css';
 import CardsFront from './CardsFront';
 import CardsBack from "./CardsBack";
+import {ReactComponent as ActiveAvatar} from "../../resources/svg/avatarActiveIcon.svg";
 
 class Game extends Component {
 
@@ -213,22 +214,7 @@ const
 const
     AvatarActive = ({name}) =>
         <div className="avatar alignBottom">
-            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                 width="64" height="64"
-                 viewBox="0 0 172 172"
-                 style={{fill: '#000000'}}>
-                <g fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt"
-                   strokeLinejoin="miter"
-                   strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none"
-                   fontWeight="none"
-                   fontSize="none" textAnchor="none" style={{mixBlendMode: 'normal'}}>
-                    <path d="M0,172v-172h172v172z" fill="none"/>
-                    <g fill="#ff1700">
-                        <path
-                            d="M86,21.5c-15.83216,0 -28.66667,12.8345 -28.66667,28.66667c0,15.83216 12.8345,28.66667 28.66667,28.66667c15.83216,0 28.66667,-12.8345 28.66667,-28.66667c0,-15.83216 -12.8345,-28.66667 -28.66667,-28.66667zM86,100.33333c-21.52867,0 -64.5,10.80733 -64.5,32.25v17.91667h129v-17.91667c0,-21.44267 -42.97133,-32.25 -64.5,-32.25z"/>
-                    </g>
-                </g>
-            </svg>
+            <ActiveAvatar/>
             <p style={{marginBottom: '0'}}>{name}</p>
         </div>;
 
