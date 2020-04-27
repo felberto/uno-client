@@ -33,8 +33,8 @@ function redirectStart(data) {
     socket.on('redirectStart', redirect => data(null, redirect));
 }
 
-function playCard(card) {
-    socket.emit('playCard', card);
+function playCard(card, color) {
+    socket.emit('playCard', card, color);
 }
 
 function getCard() {
