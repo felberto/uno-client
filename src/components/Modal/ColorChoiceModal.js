@@ -2,7 +2,6 @@ import Modal from "react-bootstrap/Modal";
 import {withRouter} from "react-router-dom";
 import * as React from "react";
 import './color-choice.modal.css';
-import {Button} from "react-bootstrap";
 import {playCard} from "../../util/Socket";
 
 class ColorChoiceModal extends React.Component {
@@ -23,10 +22,10 @@ class ColorChoiceModal extends React.Component {
             <Modal show={this.props.show}>
                 <Modal.Body>
                     <div className="container">
-                        <Button className="box yellow" onClick={() => this.onClickedHandler('yellow', card)}/>
-                        <Button className="box red" onClick={() => this.onClickedHandler('red', card)}/>
-                        <Button className="box blue" onClick={() => this.onClickedHandler('blue', card)}/>
-                        <Button className="box green" onClick={() => this.onClickedHandler('green', card)}/>
+                        <div className="box yellow" onClick={() => this.onClickedHandler('yellow', card)}/>
+                        <div className="box red" onClick={() => this.onClickedHandler('red', card)}/>
+                        <div className="box blue" onClick={() => this.onClickedHandler('blue', card)}/>
+                        <div className="box green" onClick={() => this.onClickedHandler('green', card)}/>
                     </div>
                 </Modal.Body>
             </Modal>
