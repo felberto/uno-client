@@ -25,7 +25,7 @@ class CardsFront extends Component {
         window.modal = this;
     }
 
-    getCard(card, index, first, isDisabled) {
+    getCard(card, index, first, isDisabled, uno) {
         if (card.number !== null) {
             return <CardColorNumber
                 card={card}

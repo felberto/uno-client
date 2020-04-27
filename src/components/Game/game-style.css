@@ -137,5 +137,16 @@
     border-radius: 2em;
     padding: 1em 0.5em;
     box-shadow: -0.15em 0 0.25em black;
-    text-shadow: -0.08em 0.08em black
+    text-shadow: -0.08em 0.08em black;
+}
+
+.uno-button:focus{
+    outline: 0;
+}
+
+.uno {
+    margin: 0;
+    font-size: 1.5em;
+    color: #ffd400;
+    text-shadow: -1px 1px 0 #000;
 }
