@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {getCard, getData, getId} from "../../util/Socket";
+import {clickUno, getCard, getData, getId} from "../../util/Socket";
 import {Col, Image, Row} from "react-bootstrap";
 import {withRouter} from "react-router-dom";
 import './game-style.css';
@@ -123,6 +123,10 @@ class Game extends Component {
         }
     }
 
+    unoClickedHandler(){
+        clickUno();
+    }
+
     render() {
         const count = this.state.users.length;
         if (!this.state.loading) {
@@ -133,9 +137,9 @@ class Game extends Component {
                         <Col style={{textAlign: 'center', margin: '2em 0'}}>
                             {/* Opponent 1*/}
                             {count >= 2 && this.state.userTurn === this.getOtherUsers(this.getUser().id, count, 'oben').id &&
-                            <AvatarActive name={this.getOtherUsers(this.getUser().id, count, 'oben').username}/>}
+                            <AvatarActive name={this.getOtherUsers(this.getUser().id, count, 'oben').username} uno={this.getOtherUsers(this.getUser().id, count, 'oben').uno}/>}
                             {count >= 2 && this.state.userTurn !== this.getOtherUsers(this.getUser().id, count, 'oben').id &&
-                            <Avatar name={this.getOtherUsers(this.getUser().id, count, 'oben').username}/>}
+                            <Avatar name={this.getOtherUsers(this.getUser().id, count, 'oben').username} uno={this.getOtherUsers(this.getUser().id, count, 'oben').uno}/>}
                             {count >= 2 && <CardsBack
                                 style={{textAlign: 'center'}}
                                 className="cardDeck"
@@ -150,9 +154,9 @@ class Game extends Component {
                         <Col lg="3">
                             {/* Opponent 2 */}
                             {count >= 3 && this.state.userTurn === this.getOtherUsers(this.getUser().id, count, 'links').id &&
-                            <AvatarActive name={this.getOtherUsers(this.getUser().id, count, 'links').username}/>}
+                            <AvatarActive name={this.getOtherUsers(this.getUser().id, count, 'links').username} uno={this.getOtherUsers(this.getUser().id, count, 'links').uno}/>}
                             {count >= 3 && this.state.userTurn !== this.getOtherUsers(this.getUser().id, count, 'links').id &&
-                            <Avatar name={this.getOtherUsers(this.getUser().id, count, 'links').username}/>}
+                            <Avatar name={this.getOtherUsers(this.getUser().id, count, 'links').username} uno={this.getOtherUsers(this.getUser().id, count, 'links').uno}/>}
                             {count >= 3 && <CardsBack
                                 className="cardDeck"
                                 style={{display: 'block'}}
@@ -170,9 +174,9 @@ class Game extends Component {
                         <Col lg="3">
                             {/* Opponent 3 */}
                             {count >= 4 && this.state.userTurn === this.getOtherUsers(this.getUser().id, count, 'rechts').id &&
-                            <AvatarActive name={this.getOtherUsers(this.getUser().id, count, 'rechts').username}/>}
+                            <AvatarActive name={this.getOtherUsers(this.getUser().id, count, 'rechts').username} uno={this.getOtherUsers(this.getUser().id, count, 'rechts').uno}/>}
                             {count >= 4 && this.state.userTurn !== this.getOtherUsers(this.getUser().id, count, 'rechts').id &&
-                            <Avatar name={this.getOtherUsers(this.getUser().id, count, 'rechts').username}/>}
+                            <Avatar name={this.getOtherUsers(this.getUser().id, count, 'rechts').username} uno={this.getOtherUsers(this.getUser().id, count, 'rechts').uno}/>}
                             {count >= 4 && <CardsBack
                                 className="cardDeck"
                                 style={{display: 'block'}}
@@ -183,14 +187,14 @@ class Game extends Component {
                         <Col lg="3"/>
                         <Col style={{textAlign: 'center'}}>
                             {this.state.userTurn === this.getUser().id &&
-                            <AvatarActive name={this.getUser().username}/>}
-                            {this.state.userTurn !== this.getUser().id && <Avatar name={this.getUser().username}/>}
+                            <AvatarActive name={this.getUser().username} uno={this.getUser().uno}/>}
+                            {this.state.userTurn !== this.getUser().id && <Avatar name={this.getUser().username} uno={this.getUser().uno}/>}
                             <CardsFront
                                 className="cardDeck"
                                 deck={this.getCards()}
                                 isDisabled={this.state.userTurn !== this.getUser().id}
                             />
-                            <button className="alignBottom uno-button">UNO!</button>
+                            <button className="alignBottom uno-button" onClick={() => this.unoClickedHandler()}>UNO!</button>
                         </Col>
                         <Col lg="3"/>
                     </Row>
@@ -204,18 +208,20 @@ class Game extends Component {
 }
 
 const
-    Avatar = ({name}) =>
+    Avatar = ({name, uno}) =>
         <div className="avatar alignBottom">
             <Image src="https://img.icons8.com/material-sharp/64/000000/user.png"
                    alt="User Icon"/>
             <p style={{marginBottom: '0'}}>{name}</p>
+            {uno && <p className="uno">UNO</p>}
         </div>;
 
 const
-    AvatarActive = ({name}) =>
+    AvatarActive = ({name, uno}) =>
         <div className="avatar alignBottom">
             <ActiveAvatar/>
             <p style={{marginBottom: '0'}}>{name}</p>
+            {uno && <p className="uno">UNO</p>}
         </div>;
 
 const

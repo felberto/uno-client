@@ -45,4 +45,8 @@ function getId() {
     return socket.id;
 }
 
-export {getData, getRooms, createRoom, joinRoom, clickStart, leaveLobby, redirectStart, playCard, getCard, getId};
+function clickUno(){
+    socket.emit('clickUno');
+}
+
+export {getData, getRooms, createRoom, joinRoom, clickStart, leaveLobby, redirectStart, playCard, getCard, getId, clickUno};
