@@ -49,4 +49,8 @@ function clickUno(){
     socket.emit('clickUno');
 }
 
-export {getData, getRooms, createRoom, joinRoom, clickStart, leaveLobby, redirectStart, playCard, getCard, getId, clickUno};
+function finishGame(data) {
+    socket.on('finishGame', ranking => data(null, ranking));
+}
+
+export {getData, getRooms, createRoom, joinRoom, clickStart, leaveLobby, redirectStart, playCard, getCard, getId, clickUno, finishGame};

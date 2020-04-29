@@ -13,7 +13,8 @@ class Lobby extends Component {
             name: {},
             playing: {},
             users: [],
-            deck: []
+            deck: [],
+            ranking: []
         };
         this.startGame = this.startGame.bind(this);
         this.leaveLobby = this.leaveLobby.bind(this);
@@ -23,7 +24,8 @@ class Lobby extends Component {
             name: data.name,
             playing: data.playing,
             users: data.users,
-            deck: data.deck
+            deck: data.deck,
+            ranking: data.ranking
         }));
 
         redirectStart((err, data) => this.startGame());
@@ -56,6 +58,17 @@ class Lobby extends Component {
             <div className="background row" style={{height: window.innerHeight}}>
                 <div className="col-md-6 center-horizontal-vertical">
                     <p className="lobby-uno">UNO</p>
+                    < br/>
+                    <h5>Tutorial</h5>
+                    <div>
+                        The first player places a card from his hand in the discard pile. A card can only be placed on a
+                        card of the same suit or the same number. The black cards are special action cards with special
+                        rules. If a player cannot place a matching card, he must draw a penalty card from the face-down
+                        pile. He can play this card again immediately, provided it fits. If he does not have a suitable
+                        card, the next player is next. Before the penultimate card is discarded, "UNO!" must be pressed,
+                        signalling that he only has one card left in his hand. If a player forgets this, he must draw 2
+                        penalty cards. The round is won by the one who does, who played the last card.
+                    </div>
                 </div>
                 <div className="col-md-6 center-vertical">
                     <h5>{this.state.users.length}/4 Players in Lobby</h5>
@@ -69,8 +82,20 @@ class Lobby extends Component {
                         })
                     }</ul>
 
-                    <Button onClick={this.leaveLobby} variant="dark" style={{marginRight: '0.5em'}}>Lobby
-                        verlassen</Button>
+                    <Button onClick={this.leaveLobby} variant="dark" style={{marginRight: '0.5em'}}>Leave Lobby</Button>
+                    < br/>
+                    {this.state.ranking.length !== 0 && <h5>Last Game</h5>}
+                    {this.state.ranking.length !== 0 && <div>{
+                        this.state.ranking.map((user, index) => {
+                            return (
+                                <div>
+                                    {index + 1}. {user.username}
+                                </div>
+                            );
+                        })
+                    }</div>}
+                    < br/>
+                    <Button onClick={this.leaveLobby} variant="dark" style={{marginRight: '0.5em'}}>Leave Lobby</Button>
                     {startGameButton}
 
                 </div>
