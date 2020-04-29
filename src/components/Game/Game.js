@@ -180,7 +180,9 @@ class Game extends Component {
                             />
                         </Col>
                         <Col lg={3} style={{marginTop: '2em', marginBottom: '3em', textAlign: 'left'}}>
-                            <Deck/>
+                            <Deck
+                                isDisabled={this.state.userTurn !== this.getUser().id}
+                            />
                         </Col>
                         <Col lg="3">
                             {/* Opponent 3 */}
@@ -242,11 +244,14 @@ const
         </div>;
 
 const
-    Deck = () => {
+    Deck = ({isDisabled}) => {
         return <div className="cardDeck">
-            <button onClick={() => deckClickedHandler()} className="deck">
+            {!isDisabled && <button onClick={() => deckClickedHandler()} className="deck">
                 <p>UNO</p>
-            </button>
+            </button>}
+            {isDisabled && <button style={{disabled: true}} className="deck">
+                <p>UNO</p>
+            </button>}
         </div>
     };
 
