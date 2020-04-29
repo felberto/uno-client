@@ -100,8 +100,8 @@ class JoinLobbyModal extends React.Component {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this.handleReset} variant="outline-dark">Abbrechen</Button>
-                    <Button form="createLobby" type={onsubmit} variant="dark">Lobby joinen</Button>
+                    <Button onClick={this.handleReset} variant="outline-dark">Cancel</Button>
+                    <Button form="createLobby" type={onsubmit} variant="dark">Join Lobby</Button>
                 </Modal.Footer>
             </Modal>
         );

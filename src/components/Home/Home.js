@@ -28,7 +28,7 @@ class Home extends Component {
                     <Button onClick={() => this.setState({createLobbyModalShow: true})} variant="dark"
                             size="lg"
                             active style={{display: 'block', width: '50%'}}>
-                        Lobby erstellen
+                        Create Lobby
                     </Button>
                     <CreateLobbyModal
                         show={this.state.createLobbyModalShow}
@@ -39,7 +39,7 @@ class Home extends Component {
                             size="lg"
                             active
                             style={{display: 'block', width: '50%'}}>
-                        Lobby beitreten
+                        Join Lobby
                     </Button>
                     <JoinLobbyModal
                         show={this.state.joinLobbyModalShow}
