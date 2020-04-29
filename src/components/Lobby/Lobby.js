@@ -82,7 +82,6 @@ class Lobby extends Component {
                         })
                     }</ul>
 
-                    <Button onClick={this.leaveLobby} variant="dark" style={{marginRight: '0.5em'}}>Leave Lobby</Button>
                     < br/>
                     {this.state.ranking.length !== 0 && <h5>Last Game</h5>}
                     {this.state.ranking.length !== 0 && <div>{
