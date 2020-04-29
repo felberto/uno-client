@@ -13,7 +13,8 @@ class Lobby extends Component {
             name: {},
             playing: {},
             users: [],
-            deck: []
+            deck: [],
+            ranking: []
         };
         this.startGame = this.startGame.bind(this);
         this.leaveLobby = this.leaveLobby.bind(this);
@@ -23,7 +24,8 @@ class Lobby extends Component {
             name: data.name,
             playing: data.playing,
             users: data.users,
-            deck: data.deck
+            deck: data.deck,
+            ranking: data.ranking
         }));
 
         redirectStart((err, data) => this.startGame());
@@ -80,6 +82,19 @@ class Lobby extends Component {
                         })
                     }</ul>
 
+                    <Button onClick={this.leaveLobby} variant="dark" style={{marginRight: '0.5em'}}>Leave Lobby</Button>
+                    < br/>
+                    {this.state.ranking.length !== 0 && <h5>Last Game</h5>}
+                    {this.state.ranking.length !== 0 && <div>{
+                        this.state.ranking.map((user, index) => {
+                            return (
+                                <div>
+                                    {index + 1}. {user.username}
+                                </div>
+                            );
+                        })
+                    }</div>}
+                    < br/>
                     <Button onClick={this.leaveLobby} variant="dark" style={{marginRight: '0.5em'}}>Leave Lobby</Button>
                     {startGameButton}
 
