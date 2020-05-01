@@ -151,7 +151,7 @@ class Game extends Component {
                                     uno={this.getOtherUsers(this.getUser().id, count, 'oben').uno}/>}
                             {count >= 2 && <CardsBack
                                 style={{textAlign: 'center'}}
-                                className="cardDeck"
+                                className="cardDeckBack"
                                 count={this.getOtherUsers(this.getUser().id, count, 'oben')['cards'].length}/>}
                         </Col>
                         <Col lg={3}>
@@ -169,7 +169,7 @@ class Game extends Component {
                             <Avatar name={this.getOtherUsers(this.getUser().id, count, 'links').username}
                                     uno={this.getOtherUsers(this.getUser().id, count, 'links').uno}/>}
                             {count >= 3 && <CardsBack
-                                className="cardDeck"
+                                className="cardDeckBack"
                                 style={{display: 'block'}}
                                 count={this.getOtherUsers(this.getUser().id, count, 'links')['cards'].length}/>}
                         </Col>
@@ -177,6 +177,7 @@ class Game extends Component {
                             <CardsFront
                                 deck={Array.of(this.state.stack)}
                                 isDisabled={true}
+                                cssClass={"storagePile"}
                             />
                         </Col>
                         <Col lg={3} style={{marginTop: '2em', marginBottom: '3em', textAlign: 'left'}}>
@@ -193,27 +194,33 @@ class Game extends Component {
                             <Avatar name={this.getOtherUsers(this.getUser().id, count, 'rechts').username}
                                     uno={this.getOtherUsers(this.getUser().id, count, 'rechts').uno}/>}
                             {count >= 4 && <CardsBack
-                                className="cardDeck"
+                                className="cardDeckBack"
                                 style={{display: 'block'}}
                                 count={this.getOtherUsers(this.getUser().id, count, 'rechts')['cards'].length}/>}
                         </Col>
                     </Row>
                     <Row>
-                        <Col lg="3"/>
+                        <Col lg="3" style={{textAlign: 'center'}}>
+                            <div className="alignBottomDiv">
+                                {this.state.userTurn === this.getUser().id &&
+                                <AvatarActive name={this.getUser().username} uno={this.getUser().uno}/>}
+                                {this.state.userTurn !== this.getUser().id &&
+                                <Avatar name={this.getUser().username} uno={this.getUser().uno}/>}
+                            </div>
+                        </Col>
                         <Col style={{textAlign: 'center'}}>
-                            {this.state.userTurn === this.getUser().id &&
-                            <AvatarActive name={this.getUser().username} uno={this.getUser().uno}/>}
-                            {this.state.userTurn !== this.getUser().id &&
-                            <Avatar name={this.getUser().username} uno={this.getUser().uno}/>}
                             <CardsFront
-                                className="cardDeck"
                                 deck={this.getCards()}
                                 isDisabled={this.state.userTurn !== this.getUser().id}
+                                cssClass={"cardDeck"}
                             />
-                            {!this.getUser().finished && <button className="alignBottom uno-button"
-                                                                 onClick={() => this.unoClickedHandler()}>UNO!</button>}
                         </Col>
-                        <Col lg="3"/>
+                        <Col lg="3">
+                            <div className="alignBottomDiv">
+                                {!this.getUser().finished && <button className="uno-button"
+                                                                     onClick={() => this.unoClickedHandler()}>UNO!</button>}
+                            </div>
+                        </Col>
                     </Row>
                 </div>
             )

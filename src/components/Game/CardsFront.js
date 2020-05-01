@@ -25,19 +25,24 @@ class CardsFront extends Component {
         window.modal = this;
     }
 
-    getCard(card, index, first, isDisabled, uno) {
+    getCard(card, index, first, isDisabled, position, cssClass, uno) {
+        const p = 'translate(' + position + 'em,0)';
         if (card.number !== null) {
             return <CardColorNumber
                 card={card}
                 key={index}
                 isFirst={first}
-                isDisabled={isDisabled}/>;
+                isDisabled={isDisabled}
+                position={p}
+                cssClass={cssClass}/>;
         } else {
             return <CardSpecial
                 card={card}
                 key={index}
                 isFirst={first}
-                isDisabled={isDisabled}/>;
+                isDisabled={isDisabled}
+                position={p}
+                cssClass={cssClass}/>;
         }
     }
 
@@ -48,14 +53,17 @@ class CardsFront extends Component {
     render() {
         let colorChoiceModalClose = () => this.setState({colorChoiceModalShow: false});
         const deck = this.props.deck;
+        const halfLength = deck.length / 2 + 1;
+
         return (
-            <div className="cardDeck">
+            <div className={this.props.cssClass}>
                 {deck.map((card, index) => {
-                        if (index === deck.length - 1) {
-                            return this.getCard(card, index, true, this.props.isDisabled);
-                        } else {
-                            return this.getCard(card, index, false, this.props.isDisabled);
-                        }
+                        // if (index === deck.length - 1) {
+                        //     console.log("index " + index + ", transform(" + index*2 + "em, 0) card " + card.color + " " + card.number);
+                        return this.getCard(card, index, true, this.props.isDisabled, (index - halfLength) * 2, this.props.cssClass);
+                        // } else {
+                        //     return this.getCard(card, index, false, this.props.isDisabled);
+                        // }
                     }
                 )}
                 <ColorChoiceModal
@@ -81,7 +89,10 @@ function CardColorNumber(props) {
     if (props.isFirst === true) {
         return <button className="gameCardFrontFirst"
                        onClick={() => cardClickedHandler(props.card)}
-                       style={{backgroundColor: props.card.color}}
+                       style={{
+                           backgroundColor: props.card.color,
+                           transform: props.cssClass === "storagePile" ? 'none' : props.position,
+                       }}
                        disabled={props.isDisabled}>
             <div className="card-top-first">{props.card.number}</div>
             <div className="card-middle-first">{props.card.number}</div>
@@ -101,7 +112,10 @@ function CardSpecial(props) {
     if (props.isFirst === true) {
         return <button className="gameCardFrontFirst"
                        onClick={() => cardClickedHandler(props.card)}
-                       style={{backgroundColor: props.card.color}}
+                       style={{
+                           backgroundColor: props.card.color,
+                           transform: props.cssClass === "storagePile" ? 'none' : props.position,
+                       }}
                        disabled={props.isDisabled}>
             <div className="card-top-first">
                 {props.card.action === "draw2" && '+2'}

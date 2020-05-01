@@ -8,6 +8,15 @@
     display: inline-block;
     -webkit-text-fill-color: white;
     margin: 1em 1em 0 1em;
+    width: 100%;
+    height: 15em;
+}
+
+/* Back of the cards, Ablagestapel */
+.cardDeckBack, .storagePile {
+    display: inline-block;
+    -webkit-text-fill-color: white;
+    margin: 1em 1em 0 1em;
 }
 
 .gameCardFrontFirst {
@@ -15,12 +24,27 @@
     padding: 0.5em;
     border: solid white 0.5em;
     border-radius: 0.5em;
-    display: inline-block;
     box-shadow: -0.25em 0 0.5em black;
     text-shadow: -1px -1px 0 #000,
     1px -1px 0 #000,
     -1px 1px 0 #000,
     1px 1px 0 #000;
+}
+
+.cardDeck > .gameCardFrontFirst {
+    position: absolute;
+    transition: border-width .4s;
+    transition: top .4s;
+    transition: width .4s;
+    transition: height .4s;
+}
+
+.cardDeck > .gameCardFrontFirst:hover {
+    border-width: 0.6em;
+    box-shadow: -0.5em 0.25em 0.5em #d0cd57, -0.5em -0.25em 0.5em #d0cd57;
+    top: 0.2em;
+    width: 10.6em;
+    height: 15.6em;
 }
 
 /* Front Cards, half, behind the first card */
@@ -67,7 +91,6 @@
     font-size: 1.5em;
 }
 
-/* Back of the cards */
 .gameCardBackFirst {
     background-color: black;
     border: solid white 0.3em;
@@ -120,6 +143,12 @@
     display: inline-block;
 }
 
+.alignBottomDiv > .avatar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
 .avatar > p {
     text-align: center;
 }
@@ -127,6 +156,10 @@
 /* align content at the bottom */
 .alignBottom {
     vertical-align: bottom;
+}
+
+.alignBottomDiv {
+    height: 100%;
 }
 
 .uno-button {
@@ -138,9 +171,15 @@
     padding: 1em 0.5em;
     box-shadow: -0.15em 0 0.25em black;
     text-shadow: -0.08em 0.08em black;
+    position: absolute;
+    bottom: 0;
 }
 
-.uno-button:focus{
+.uno-button:hover {
+    box-shadow: -0.35em 0 0.5em black;
+}
+
+.uno-button:focus {
     outline: 0;
 }
 
