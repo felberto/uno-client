@@ -23,11 +23,11 @@ jobs:
   include:
     - stage: test
       script:
-        - npm test -- --coverage --watchAll=false
+        - npm test -- --updateSnapshot --coverage --watchAll=false
     - stage: build
       script:
         - npm run build
     - stage: sonar
       script:
-        - npm test -- --coverage --watchAll=false
+        - npm test -- --updateSnapshot --coverage --watchAll=false
         - sonar-scanner
