@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {clickUno, finishGame, getCard, getData, getId} from "../../util/Socket";
+import {cancelGame, clickUno, finishGame, getCard, getData, getId} from "../../util/Socket";
 import {Col, Image, Row} from "react-bootstrap";
 import {withRouter} from "react-router-dom";
 import './game-style.css';
@@ -32,10 +32,15 @@ class Game extends Component {
             userTurn: data.userTurn,
             ranking: data.ranking
         }));
-        finishGame((err, data) => this.openFinishGameModal());
+        finishGame((err, data) => this.finishGameFunction());
+        cancelGame((err, data) => this.cancelGameFunction());
     }
 
-    openFinishGameModal() {
+    finishGameFunction() {
+        this.props.history.push('/lobby');
+    }
+
+    cancelGameFunction() {
         this.props.history.push('/lobby');
     }
 

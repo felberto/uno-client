@@ -53,4 +53,8 @@ function finishGame(data) {
     socket.on('finishGame', ranking => data(null, ranking));
 }
 
-export {getData, getRooms, createRoom, joinRoom, clickStart, leaveLobby, redirectStart, playCard, getCard, getId, clickUno, finishGame};
+function cancelGame(data){
+    socket.on('cancelGame', cancel => data(null, cancel));
+}
+
+export {getData, getRooms, createRoom, joinRoom, clickStart, leaveLobby, redirectStart, playCard, getCard, getId, clickUno, finishGame, cancelGame};
