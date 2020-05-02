@@ -1,6 +1,6 @@
 server {
-  # Listen to port defined by Heroku
-  listen $PORT default_server;
+  # Listen to port
+  listen 80 default_server;
 
   # Serve static files for requests made to /
   location / {
