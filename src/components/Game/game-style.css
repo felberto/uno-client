@@ -12,7 +12,7 @@
     height: 15em;
 }
 
-/* Back of the cards, Ablagestapel */
+/* Back of the cards, storage pile in the middle */
 .cardDeckBack, .storagePile {
     display: inline-block;
     -webkit-text-fill-color: white;
@@ -33,10 +33,7 @@
 
 .cardDeck > .gameCardFrontFirst {
     position: absolute;
-    transition: border-width .4s;
-    transition: top .4s;
-    transition: width .4s;
-    transition: height .4s;
+    transition: border-width .4s, top .4s, width .4s, height .4s;
 }
 
 .cardDeck > .gameCardFrontFirst:hover {
@@ -47,31 +44,9 @@
     height: 15.6em;
 }
 
-/* Front Cards, half, behind the first card */
-.gameCardFront {
-    width: 3em;
-    padding: 0.5em;
-    border-left: solid white 0.5em;
-    border-top: solid white 0.5em;
-    border-bottom: solid white 0.5em;
-    border-bottom-left-radius: 0.5em;
-    border-top-left-radius: 0.5em;
-    display: inline-block;
-    box-shadow: -0.25em 0 0.5em black;
-    text-shadow: -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000;
-}
-
 /* Content of the card - Numbers etc. */
 .card-top-first {
     text-align: left;
-    font-size: 1.5em;
-}
-
-.card-top {
-    padding-bottom: 7em;
     font-size: 1.5em;
 }
 
@@ -86,11 +61,16 @@
 }
 
 .card-bottom {
-    /* text upside down? */
     text-align: right;
     font-size: 1.5em;
 }
 
+.iconStyle {
+    width: 1.3em;
+    height: 1.3em;
+}
+
+/* cards back */
 .gameCardBackFirst {
     background-color: black;
     border: solid white 0.3em;
@@ -122,6 +102,7 @@
     padding: 0 0 0.4em 0.4em;
 }
 
+/* where to draw a card */
 .deck {
     background-color: black;
     min-width: 10em;
@@ -158,6 +139,7 @@
     vertical-align: bottom;
 }
 
+/* div with 100% height to align items at the bottom*/
 .alignBottomDiv {
     height: 100%;
 }
@@ -173,10 +155,14 @@
     text-shadow: -0.08em 0.08em black;
     position: absolute;
     bottom: 0;
+    transition: all .2s ease-in-out;
 }
 
 .uno-button:hover {
-    box-shadow: -0.35em 0 0.5em black;
+    box-shadow: -0.45em 0 0.25em black;
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .uno-button:focus {

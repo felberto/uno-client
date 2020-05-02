@@ -141,7 +141,7 @@ class Game extends Component {
                 <div className="background-game" style={{height: window.innerHeight}}>
                     <Row>
                         <Col lg={3}/>
-                        <Col style={{textAlign: 'center', margin: '2em 0'}}>
+                        <Col style={{textAlign: 'center', margin: '1em 0'}}>
                             {/* Opponent 1*/}
                             {count >= 2 && this.state.userTurn === this.getOtherUsers(this.getUser().id, count, 'oben').id &&
                             <AvatarActive name={this.getOtherUsers(this.getUser().id, count, 'oben').username}
@@ -154,10 +154,7 @@ class Game extends Component {
                                 className="cardDeckBack"
                                 count={this.getOtherUsers(this.getUser().id, count, 'oben')['cards'].length}/>}
                         </Col>
-                        <Col lg={3}>
-                            {/*Todo: Spiel beenden?
-                            <Button variant="dark" onClick={this.leaveLobby}>Lobby verlassen</Button>*/}
-                        </Col>
+                        <Col lg={3}/>
                     </Row>
                     <Row>
                         <Col lg="3">
@@ -173,14 +170,14 @@ class Game extends Component {
                                 style={{display: 'block'}}
                                 count={this.getOtherUsers(this.getUser().id, count, 'links')['cards'].length}/>}
                         </Col>
-                        <Col lg={3} style={{marginTop: '2em', marginBottom: '3em', textAlign: 'right'}}>
+                        <Col sm={3} style={{marginTop: '2em', marginBottom: '3em', textAlign: 'right'}}>
                             <CardsFront
                                 deck={Array.of(this.state.stack)}
                                 isDisabled={true}
                                 cssClass={"storagePile"}
                             />
                         </Col>
-                        <Col lg={3} style={{marginTop: '2em', marginBottom: '3em', textAlign: 'left'}}>
+                        <Col sm={3} style={{marginTop: '2em', marginBottom: '3em', textAlign: 'left'}}>
                             <Deck
                                 isDisabled={this.state.userTurn !== this.getUser().id}
                             />
@@ -200,7 +197,7 @@ class Game extends Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col lg="3" style={{textAlign: 'center'}}>
+                        <Col sm="3" style={{textAlign: 'center'}}>
                             <div className="alignBottomDiv">
                                 {this.state.userTurn === this.getUser().id &&
                                 <AvatarActive name={this.getUser().username} uno={this.getUser().uno}/>}
@@ -215,7 +212,7 @@ class Game extends Component {
                                 cssClass={"cardDeck"}
                             />
                         </Col>
-                        <Col lg="3">
+                        <Col sm="3">
                             <div className="alignBottomDiv">
                                 {!this.getUser().finished && <button className="uno-button"
                                                                      onClick={() => this.unoClickedHandler()}>UNO!</button>}
@@ -227,7 +224,6 @@ class Game extends Component {
         } else {
             return (<div>Loading...</div>)
         }
-
     }
 }
 
