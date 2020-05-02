@@ -6,7 +6,7 @@ class CardsBack extends Component {
         const loopArray = Array.from(Array(this.props.count), (_, x) => x);
         console.log(loopArray);
         return (
-            <div className="cardDeck">
+            <div className="cardDeckBack">
                 {loopArray.map((_, i) => {
                     if (i === this.props.count - 1) {
                         return <div className="gameCardBackFirst" key={i}>

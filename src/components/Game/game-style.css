@@ -8,6 +8,15 @@
     display: inline-block;
     -webkit-text-fill-color: white;
     margin: 1em 1em 0 1em;
+    width: 100%;
+    height: 15em;
+}
+
+/* Back of the cards, storage pile in the middle */
+.cardDeckBack, .storagePile {
+    display: inline-block;
+    -webkit-text-fill-color: white;
+    margin: 1em 1em 0 1em;
 }
 
 .gameCardFrontFirst {
@@ -15,7 +24,6 @@
     padding: 0.5em;
     border: solid white 0.5em;
     border-radius: 0.5em;
-    display: inline-block;
     box-shadow: -0.25em 0 0.5em black;
     text-shadow: -1px -1px 0 #000,
     1px -1px 0 #000,
@@ -23,31 +31,23 @@
     1px 1px 0 #000;
 }
 
-/* Front Cards, half, behind the first card */
-.gameCardFront {
-    width: 3em;
-    padding: 0.5em;
-    border-left: solid white 0.5em;
-    border-top: solid white 0.5em;
-    border-bottom: solid white 0.5em;
-    border-bottom-left-radius: 0.5em;
-    border-top-left-radius: 0.5em;
-    display: inline-block;
-    box-shadow: -0.25em 0 0.5em black;
-    text-shadow: -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000;
+.cardDeck > .gameCardFrontFirst {
+    position: absolute;
+    transition: width .4s, height .4s;
+}
+
+.cardDeck > .gameCardFrontFirst:hover {
+    border-width: 0.6em;
+    box-shadow: -0.5em 0.25em 0.5em #fcf341, -0.5em -0.25em 0.5em #fcf341,
+    0.5em -0.25em 0.5em #fcf341, 0.5em 0.25em 0.5em #fcf341;
+    top: -0.6em;
+    width: 10.5em;
+    height: 15.5em;
 }
 
 /* Content of the card - Numbers etc. */
 .card-top-first {
     text-align: left;
-    font-size: 1.5em;
-}
-
-.card-top {
-    padding-bottom: 7em;
     font-size: 1.5em;
 }
 
@@ -62,12 +62,16 @@
 }
 
 .card-bottom {
-    /* text upside down? */
     text-align: right;
     font-size: 1.5em;
 }
 
-/* Back of the cards */
+.iconStyle {
+    width: 1.3em;
+    height: 1.3em;
+}
+
+/* cards back */
 .gameCardBackFirst {
     background-color: black;
     border: solid white 0.3em;
@@ -99,6 +103,7 @@
     padding: 0 0 0.4em 0.4em;
 }
 
+/* where to draw a card */
 .deck {
     background-color: black;
     min-width: 10em;
@@ -120,6 +125,12 @@
     display: inline-block;
 }
 
+.alignBottomDiv > .avatar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
 .avatar > p {
     text-align: center;
 }
@@ -129,18 +140,33 @@
     vertical-align: bottom;
 }
 
+/* div with 100% height to align items at the bottom*/
+.alignBottomDiv {
+    height: 100%;
+}
+
 .uno-button {
-    color: #ffeb00;
+    color: #ffd400;
     font-size: 1.5em;
     background-color: #ff2500;
     border-color: #000000a8;
     border-radius: 2em;
     padding: 1em 0.5em;
     box-shadow: -0.15em 0 0.25em black;
-    text-shadow: -0.08em 0.08em black;
+    text-shadow: -1px 1px 0 black;
+    position: absolute;
+    bottom: 0;
+    transition: all .2s ease-in-out;
 }
 
-.uno-button:focus{
+.uno-button:hover {
+    box-shadow: -0.45em 0 0.25em black;
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.uno-button:focus {
     outline: 0;
 }
 
@@ -149,4 +175,11 @@
     font-size: 1.5em;
     color: #ffd400;
     text-shadow: -1px 1px 0 #000;
+    animation: zoomInAndOut 3.5s infinite;
+}
+
+@keyframes zoomInAndOut {
+    50% {
+        transform: scale(1.4, 1.4);
+    }
 }
