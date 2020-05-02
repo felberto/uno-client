@@ -57,6 +57,7 @@ class Game extends Component {
                                 return this.state.users[i];
                             }
                         }
+                        break;
                     case 3:
                         let index3 = userid + 1;
                         if (index3 === 3) {
@@ -67,6 +68,7 @@ class Game extends Component {
                                 return this.state.users[i];
                             }
                         }
+                        break;
                     case 4:
                         let index4 = userid + 2;
                         if (index4 === 4) {
@@ -79,7 +81,11 @@ class Game extends Component {
                                 return this.state.users[i];
                             }
                         }
+                        break;
+                    default:
+                        break;
                 }
+                break;
             case 'rechts':
                 let index = userid + 1;
                 if (index === 4) {
@@ -90,6 +96,7 @@ class Game extends Component {
                         return this.state.users[i];
                     }
                 }
+                break;
             case 'links':
                 switch (count) {
                     case 3:
@@ -104,6 +111,7 @@ class Game extends Component {
                                 return this.state.users[i];
                             }
                         }
+                        break;
                     case 4:
                         let index4 = userid + 3;
                         if (index4 === 4) {
@@ -118,7 +126,13 @@ class Game extends Component {
                                 return this.state.users[i];
                             }
                         }
+                        break;
+                    default:
+                        break;
                 }
+                break;
+            default:
+                break;
         }
     }
 

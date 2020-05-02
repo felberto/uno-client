@@ -33,7 +33,7 @@ exports[`load Home compare snapshot 1`] = `
       }
       type="button"
     >
-      Lobby erstellen
+      Create Lobby
     </button>
     <br />
     <button
@@ -48,7 +48,7 @@ exports[`load Home compare snapshot 1`] = `
       }
       type="button"
     >
-      Lobby beitreten
+      Join Lobby
     </button>
   </div>
 </div>
