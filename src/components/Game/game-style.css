@@ -33,15 +33,16 @@
 
 .cardDeck > .gameCardFrontFirst {
     position: absolute;
-    transition: border-width .4s, top .4s, width .4s, height .4s;
+    transition: width .4s, height .4s;
 }
 
 .cardDeck > .gameCardFrontFirst:hover {
     border-width: 0.6em;
-    box-shadow: -0.5em 0.25em 0.5em #d0cd57, -0.5em -0.25em 0.5em #d0cd57;
-    top: 0.2em;
-    width: 10.6em;
-    height: 15.6em;
+    box-shadow: -0.5em 0.25em 0.5em #fcf341, -0.5em -0.25em 0.5em #fcf341,
+    0.5em -0.25em 0.5em #fcf341, 0.5em 0.25em 0.5em #fcf341;
+    top: -0.6em;
+    width: 10.5em;
+    height: 15.5em;
 }
 
 /* Content of the card - Numbers etc. */
@@ -145,14 +146,14 @@
 }
 
 .uno-button {
-    color: #ffeb00;
+    color: #ffd400;
     font-size: 1.5em;
     background-color: #ff2500;
     border-color: #000000a8;
     border-radius: 2em;
     padding: 1em 0.5em;
     box-shadow: -0.15em 0 0.25em black;
-    text-shadow: -0.08em 0.08em black;
+    text-shadow: -1px 1px 0 black;
     position: absolute;
     bottom: 0;
     transition: all .2s ease-in-out;
@@ -174,4 +175,11 @@
     font-size: 1.5em;
     color: #ffd400;
     text-shadow: -1px 1px 0 #000;
+    animation: zoomInAndOut 3.5s infinite;
+}
+
+@keyframes zoomInAndOut {
+    50% {
+        transform: scale(1.4, 1.4);
+    }
 }

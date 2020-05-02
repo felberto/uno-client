@@ -56,7 +56,7 @@ class CardsFront extends Component {
         return (
             <div className={this.props.cssClass}>
                 {deck.map((card, index) => {
-                    return this.getCard(card, index, this.props.isDisabled, (index - halfLength) * 2, this.props.cssClass);
+                    return this.getCard(card, index, this.props.isDisabled, (index - halfLength) * 2.5, this.props.cssClass);
                     }
                 )}
                 <ColorChoiceModal
