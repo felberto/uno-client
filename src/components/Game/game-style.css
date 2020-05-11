@@ -36,7 +36,7 @@
     transition: width .4s, height .4s;
 }
 
-.cardDeck > .gameCardFrontFirst:hover {
+.cardDeck > .hoverCard:hover {
     border-width: 0.6em;
     box-shadow: -0.5em 0.25em 0.5em #fcf341, -0.5em -0.25em 0.5em #fcf341,
     0.5em -0.25em 0.5em #fcf341, 0.5em 0.25em 0.5em #fcf341;

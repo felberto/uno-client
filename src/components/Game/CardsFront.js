@@ -79,7 +79,9 @@ function cardClickedHandler(card) {
 }
 
 function CardColorNumber(props) {
-    return <button className="gameCardFrontFirst"
+    let cssClassHover = (props.card.valid === false || props.isDisabled) ? '' : 'hoverCard';
+    cssClassHover = cssClassHover + " gameCardFrontFirst";
+    return <button className={cssClassHover}
                    onClick={() => cardClickedHandler(props.card)}
                    style={{
                        backgroundColor: props.card.color,
@@ -93,7 +95,9 @@ function CardColorNumber(props) {
 }
 
 function CardSpecial(props) {
-    return <button className="gameCardFrontFirst"
+    let cssClassHover = (props.card.valid === false || props.isDisabled) ? '' : 'hoverCard';
+    cssClassHover = cssClassHover + " gameCardFrontFirst";
+    return <button className={cssClassHover}
                    onClick={() => cardClickedHandler(props.card)}
                    style={{
                        backgroundColor: props.card.color,
