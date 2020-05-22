@@ -21,7 +21,6 @@ class Game extends Component {
             userTurn: {},
             ranking: []
         };
-        console.log("constructor");
         getData((err, data) => this.setState({
             loading: false,
             name: data.name,
@@ -151,6 +150,34 @@ class Game extends Component {
 
     unoClickedHandler() {
         clickUno();
+    }
+
+    componentDidUpdate() {
+        let user;
+        for (let i = 0; i < this.state.users.length; ++i) {
+            if (this.state.users[i].id === this.state.userTurn) {
+                user = this.state.users[i];
+            }
+        }
+
+        if (user.user === 'bot') {
+            fetch('http://localhost:8000/api/playBot', {
+                method: "POST",
+                mode: "cors",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    room: this.state.name
+                })
+            })
+                .then(res => res.json())
+                .then((data) => {
+                    console.log(data);
+                })
+                .catch(console.log)
+        }
+
     }
 
     render() {
