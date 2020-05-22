@@ -178,6 +178,13 @@
     animation: zoomInAndOut 3.5s infinite;
 }
 
+.finishedLabel {
+    margin: 0;
+    font-size: 1.5em;
+    color: #ffd400;
+    text-shadow: -1px 1px 0 #000;
+}
+
 @keyframes zoomInAndOut {
     50% {
         transform: scale(1.4, 1.4);
