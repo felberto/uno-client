@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Button} from "react-bootstrap";
 import {withRouter} from "react-router-dom";
-import {clickStart, getData, leaveLobby, redirectStart} from "../../util/Socket";
+import {addBot, clickStart, getData, leaveLobby, redirectStart} from "../../util/Socket";
 import "../../global-style.css";
 import "./lobby-style.css";
 
@@ -46,12 +46,23 @@ class Lobby extends Component {
         this.props.history.push('/');
     }
 
+    clickAddBot() {
+        addBot();
+    }
+
     render() {
         let startGameButton;
         if (this.state.users.length >= 2 && this.state.users.length <= 4) {
             startGameButton = <Button onClick={this.clickStart} variant="dark">Start</Button>
         } else {
             startGameButton = <Button disabled={true} onClick={this.clickStart} variant="dark">Start</Button>
+        }
+
+        let addBotButton;
+        if (this.state.users.length >= 1 && this.state.users.length < 4) {
+            addBotButton = <Button onClick={this.clickAddBot} style={{marginRight: '0.5em'}} variant="dark">Add Bot</Button>
+        } else {
+            addBotButton = <Button disabled={true} onClick={this.clickAddBot} style={{marginRight: '0.5em'}} variant="dark">Add Bot</Button>
         }
 
         return (
@@ -95,6 +106,7 @@ class Lobby extends Component {
                     }</div>}
                     < br/>
                     <Button onClick={this.leaveLobby} variant="dark" style={{marginRight: '0.5em'}}>Leave Lobby</Button>
+                    {addBotButton}
                     {startGameButton}
 
                 </div>
