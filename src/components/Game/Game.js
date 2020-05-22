@@ -21,7 +21,6 @@ class Game extends Component {
             userTurn: {},
             ranking: []
         };
-        console.log("constructor");
         getData((err, data) => this.setState({
             loading: false,
             name: data.name,
@@ -154,7 +153,6 @@ class Game extends Component {
     }
 
     componentDidUpdate() {
-        console.log("componentDidUpdate");
         let user;
         for (let i = 0; i < this.state.users.length; ++i) {
             if (this.state.users[i].id === this.state.userTurn) {
