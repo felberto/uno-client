@@ -194,7 +194,9 @@ class Game extends Component {
                                           uno={this.getOtherUsers(this.getUser().id, count, 'oben').uno}/>}
                             {count >= 2 && this.state.userTurn !== this.getOtherUsers(this.getUser().id, count, 'oben').id &&
                             <Avatar name={this.getOtherUsers(this.getUser().id, count, 'oben').username}
-                                    uno={this.getOtherUsers(this.getUser().id, count, 'oben').uno}/>}
+                                    uno={this.getOtherUsers(this.getUser().id, count, 'oben').uno}
+                                    finished={this.getOtherUsers(this.getUser().id, count, 'oben').finished}
+                                    ranking={this.state.ranking}/>}
                             {count >= 2 && <CardsBack
                                 style={{textAlign: 'center'}}
                                 className="cardDeckBack"
@@ -210,7 +212,9 @@ class Game extends Component {
                                           uno={this.getOtherUsers(this.getUser().id, count, 'links').uno}/>}
                             {count >= 3 && this.state.userTurn !== this.getOtherUsers(this.getUser().id, count, 'links').id &&
                             <Avatar name={this.getOtherUsers(this.getUser().id, count, 'links').username}
-                                    uno={this.getOtherUsers(this.getUser().id, count, 'links').uno}/>}
+                                    uno={this.getOtherUsers(this.getUser().id, count, 'links').uno}
+                                    finished={this.getOtherUsers(this.getUser().id, count, 'links').finished}
+                                    ranking={this.state.ranking}/>}
                             {count >= 3 && <CardsBack
                                 className="cardDeckBack"
                                 style={{display: 'block'}}
@@ -235,7 +239,9 @@ class Game extends Component {
                                           uno={this.getOtherUsers(this.getUser().id, count, 'rechts').uno}/>}
                             {count >= 4 && this.state.userTurn !== this.getOtherUsers(this.getUser().id, count, 'rechts').id &&
                             <Avatar name={this.getOtherUsers(this.getUser().id, count, 'rechts').username}
-                                    uno={this.getOtherUsers(this.getUser().id, count, 'rechts').uno}/>}
+                                    uno={this.getOtherUsers(this.getUser().id, count, 'rechts').uno}
+                                    finished={this.getOtherUsers(this.getUser().id, count, 'rechts').finished}
+                                    ranking={this.state.ranking}/>}
                             {count >= 4 && <CardsBack
                                 className="cardDeckBack"
                                 style={{display: 'block'}}
@@ -248,7 +254,9 @@ class Game extends Component {
                                 {this.state.userTurn === this.getUser().id &&
                                 <AvatarActive name={this.getUser().username} uno={this.getUser().uno}/>}
                                 {this.state.userTurn !== this.getUser().id &&
-                                <Avatar name={this.getUser().username} uno={this.getUser().uno}/>}
+                                <Avatar name={this.getUser().username} uno={this.getUser().uno}
+                                        finished={this.getUser().finished}
+                                        ranking={this.state.ranking}/>}
                             </div>
                         </Col>
                         <Col style={{textAlign: 'center'}}>
@@ -274,13 +282,16 @@ class Game extends Component {
 }
 
 const
-    Avatar = ({name, uno}) =>
+    Avatar = ({name, uno, finished, ranking}) =>
         <div className="avatar alignBottom">
             <Image src="https://img.icons8.com/material-sharp/64/000000/user.png"
                    alt="User Icon"/>
             <p style={{marginBottom: '0'}}>{name}</p>
             {console.log(uno)}
-            {uno && <p className="uno">UNO</p>}
+            {uno && !finished && <p className="uno">UNO</p>}
+            {uno && finished &&
+            <p className="finishedLabel">{ranking.findIndex(n => n.username.toString() === name.toString()) + 1}.
+                Rank</p>}
         </div>;
 
 const
