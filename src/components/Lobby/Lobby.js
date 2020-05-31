@@ -13,8 +13,7 @@ class Lobby extends Component {
             name: {},
             playing: {},
             users: [],
-            deck: [],
-            ranking: []
+            deck: []
         };
         this.startGame = this.startGame.bind(this);
         this.leaveLobby = this.leaveLobby.bind(this);
@@ -24,8 +23,7 @@ class Lobby extends Component {
             name: data.name,
             playing: data.playing,
             users: data.users,
-            deck: data.deck,
-            ranking: data.ranking
+            deck: data.deck
         }));
 
         redirectStart((err, data) => this.startGame());
@@ -60,9 +58,12 @@ class Lobby extends Component {
 
         let addBotButton;
         if (this.state.users.length >= 1 && this.state.users.length < 4) {
-            addBotButton = <Button onClick={this.clickAddBot} style={{marginRight: '0.5em'}} variant="dark">Add Bot</Button>
+            addBotButton =
+                <Button onClick={this.clickAddBot} style={{marginRight: '0.5em'}} variant="dark">Add Bot</Button>
         } else {
-            addBotButton = <Button disabled={true} onClick={this.clickAddBot} style={{marginRight: '0.5em'}} variant="dark">Add Bot</Button>
+            addBotButton =
+                <Button disabled={true} onClick={this.clickAddBot} style={{marginRight: '0.5em'}} variant="dark">Add
+                    Bot</Button>
         }
 
         return (
@@ -94,16 +95,27 @@ class Lobby extends Component {
                     }</ul>
 
                     < br/>
-                    {this.state.ranking.length !== 0 && <h5>Last Game</h5>}
-                    {this.state.ranking.length !== 0 && <div>{
-                        this.state.ranking.map((user, index) => {
+                    <h5>Last Game</h5>
+                    <div>{
+                        this.state.users.sort((a, b) => a.rankingLastGame > b.rankingLastGame ? 1 : -1).map((user) => {
                             return (
                                 <div>
-                                    {index + 1}. {user.username}
+                                    {user.rankingLastGame}. {user.username}
                                 </div>
                             );
                         })
-                    }</div>}
+                    }</div>
+                    < br/>
+                    <h5>Total score</h5>
+                    <div>{
+                        this.state.users.sort((a, b) => a.rankingTotal > b.rankingTotal ? 1 : -1).map((user) => {
+                            return (
+                                <div>
+                                    {user.username}: {user.rankingTotal} points
+                                </div>
+                            );
+                        })
+                    }</div>
                     < br/>
                     <Button onClick={this.leaveLobby} variant="dark" style={{marginRight: '0.5em'}}>Leave Lobby</Button>
                     {addBotButton}
