@@ -22,5 +22,5 @@ COPY . .
 RUN npm ci
 # Build frontend
 RUN npm run build
-# Expose port picked by Heroku. Otherwise we couldn't connect to the server running inside a docker container
-EXPOSE $PORT
+# Expose port
+EXPOSE 80

@@ -25,6 +25,10 @@ function leaveLobby() {
     socket.emit('leaveRoom');
 }
 
+function addBot() {
+    socket.emit('addBot');
+}
+
 function clickStart(name) {
     socket.emit('clickStart', name);
 }
@@ -33,8 +37,8 @@ function redirectStart(data) {
     socket.on('redirectStart', redirect => data(null, redirect));
 }
 
-function playCard(card) {
-    socket.emit('playCard', card);
+function playCard(card, color) {
+    socket.emit('playCard', card, color);
 }
 
 function getCard() {
@@ -45,4 +49,31 @@ function getId() {
     return socket.id;
 }
 
-export {getData, getRooms, createRoom, joinRoom, clickStart, leaveLobby, redirectStart, playCard, getCard, getId};
+function clickUno() {
+    socket.emit('clickUno');
+}
+
+function finishGame(data) {
+    socket.on('finishGame', ranking => data(null, ranking));
+}
+
+function cancelGame(data) {
+    socket.on('cancelGame', cancel => data(null, cancel));
+}
+
+export {
+    getData,
+    getRooms,
+    createRoom,
+    joinRoom,
+    clickStart,
+    leaveLobby,
+    addBot,
+    redirectStart,
+    playCard,
+    getCard,
+    getId,
+    clickUno,
+    finishGame,
+    cancelGame
+};

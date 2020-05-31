@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`load Home compare snapshot 1`] = `
+<div
+  className="background row"
+  style={
+    Object {
+      "height": 768,
+    }
+  }
+>
+  <div
+    className="col-md-6 center-horizontal-vertical"
+  >
+    <p
+      className="home-uno"
+    >
+      UNO
+    </p>
+  </div>
+  <div
+    className="col-md-6 center-horizontal-vertical"
+  >
+    <button
+      className="btn active btn-dark btn-lg"
+      disabled={false}
+      onClick={[Function]}
+      style={
+        Object {
+          "display": "block",
+          "width": "50%",
+        }
+      }
+      type="button"
+    >
+      Create Lobby
+    </button>
+    <br />
+    <button
+      className="btn active btn-dark btn-lg"
+      disabled={false}
+      onClick={[Function]}
+      style={
+        Object {
+          "display": "block",
+          "width": "50%",
+        }
+      }
+      type="button"
+    >
+      Join Lobby
+    </button>
+  </div>
+</div>
+`;

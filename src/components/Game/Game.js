@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {getCard, getData, getId} from "../../util/Socket";
+import {cancelGame, clickUno, finishGame, getCard, getData, getId} from "../../util/Socket";
 import {Col, Image, Row} from "react-bootstrap";
 import {withRouter} from "react-router-dom";
 import './game-style.css';
@@ -9,8 +9,8 @@ import {ReactComponent as ActiveAvatar} from "../../resources/svg/avatarActiveIc
 
 class Game extends Component {
 
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
         this.state = {
             loading: true,
             name: {},
@@ -18,9 +18,9 @@ class Game extends Component {
             users: [],
             deck: [],
             stack: {},
-            userTurn: {}
+            userTurn: {},
+            ranking: []
         };
-        console.log("constructor");
         getData((err, data) => this.setState({
             loading: false,
             name: data.name,
@@ -28,8 +28,19 @@ class Game extends Component {
             users: data.users,
             deck: data.deck,
             stack: data.stack,
-            userTurn: data.userTurn
+            userTurn: data.userTurn,
+            ranking: data.ranking
         }));
+        finishGame((err, data) => this.finishGameFunction());
+        cancelGame((err, data) => this.cancelGameFunction());
+    }
+
+    finishGameFunction() {
+        this.props.history.push('/lobby');
+    }
+
+    cancelGameFunction() {
+        this.props.history.push('/lobby');
     }
 
     getUser() {
@@ -50,6 +61,7 @@ class Game extends Component {
                                 return this.state.users[i];
                             }
                         }
+                        break;
                     case 3:
                         let index3 = userid + 1;
                         if (index3 === 3) {
@@ -60,6 +72,7 @@ class Game extends Component {
                                 return this.state.users[i];
                             }
                         }
+                        break;
                     case 4:
                         let index4 = userid + 2;
                         if (index4 === 4) {
@@ -72,7 +85,11 @@ class Game extends Component {
                                 return this.state.users[i];
                             }
                         }
+                        break;
+                    default:
+                        break;
                 }
+                break;
             case 'rechts':
                 let index = userid + 1;
                 if (index === 4) {
@@ -83,6 +100,7 @@ class Game extends Component {
                         return this.state.users[i];
                     }
                 }
+                break;
             case 'links':
                 switch (count) {
                     case 3:
@@ -97,6 +115,7 @@ class Game extends Component {
                                 return this.state.users[i];
                             }
                         }
+                        break;
                     case 4:
                         let index4 = userid + 3;
                         if (index4 === 4) {
@@ -111,7 +130,13 @@ class Game extends Component {
                                 return this.state.users[i];
                             }
                         }
+                        break;
+                    default:
+                        break;
                 }
+                break;
+            default:
+                break;
         }
     }
 
@@ -123,6 +148,38 @@ class Game extends Component {
         }
     }
 
+    unoClickedHandler() {
+        clickUno();
+    }
+
+    componentDidUpdate() {
+        let user;
+        for (let i = 0; i < this.state.users.length; ++i) {
+            if (this.state.users[i].id === this.state.userTurn) {
+                user = this.state.users[i];
+            }
+        }
+
+        if (user.user === 'bot') {
+            fetch('http://localhost:8000/api/playBot', {
+                method: "POST",
+                mode: "cors",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    room: this.state.name
+                })
+            })
+                .then(res => res.json())
+                .then((data) => {
+                    console.log(data);
+                })
+                .catch(console.log)
+        }
+
+    }
+
     render() {
         const count = this.state.users.length;
         if (!this.state.loading) {
@@ -130,100 +187,131 @@ class Game extends Component {
                 <div className="background-game" style={{height: window.innerHeight}}>
                     <Row>
                         <Col lg={3}/>
-                        <Col style={{textAlign: 'center', margin: '2em 0'}}>
+                        <Col style={{textAlign: 'center', margin: '1em 0'}}>
                             {/* Opponent 1*/}
                             {count >= 2 && this.state.userTurn === this.getOtherUsers(this.getUser().id, count, 'oben').id &&
-                            <AvatarActive name={this.getOtherUsers(this.getUser().id, count, 'oben').username}/>}
+                            <AvatarActive name={this.getOtherUsers(this.getUser().id, count, 'oben').username}
+                                          uno={this.getOtherUsers(this.getUser().id, count, 'oben').uno}/>}
                             {count >= 2 && this.state.userTurn !== this.getOtherUsers(this.getUser().id, count, 'oben').id &&
-                            <Avatar name={this.getOtherUsers(this.getUser().id, count, 'oben').username}/>}
+                            <Avatar name={this.getOtherUsers(this.getUser().id, count, 'oben').username}
+                                    uno={this.getOtherUsers(this.getUser().id, count, 'oben').uno}
+                                    finished={this.getOtherUsers(this.getUser().id, count, 'oben').finished}
+                                    ranking={this.state.ranking}/>}
                             {count >= 2 && <CardsBack
                                 style={{textAlign: 'center'}}
-                                className="cardDeck"
+                                className="cardDeckBack"
                                 count={this.getOtherUsers(this.getUser().id, count, 'oben')['cards'].length}/>}
                         </Col>
-                        <Col lg={3}>
-                            {/*Todo: Spiel beenden?
-                            <Button variant="dark" onClick={this.leaveLobby}>Lobby verlassen</Button>*/}
-                        </Col>
+                        <Col lg={3}/>
                     </Row>
                     <Row>
                         <Col lg="3">
                             {/* Opponent 2 */}
                             {count >= 3 && this.state.userTurn === this.getOtherUsers(this.getUser().id, count, 'links').id &&
-                            <AvatarActive name={this.getOtherUsers(this.getUser().id, count, 'links').username}/>}
+                            <AvatarActive name={this.getOtherUsers(this.getUser().id, count, 'links').username}
+                                          uno={this.getOtherUsers(this.getUser().id, count, 'links').uno}/>}
                             {count >= 3 && this.state.userTurn !== this.getOtherUsers(this.getUser().id, count, 'links').id &&
-                            <Avatar name={this.getOtherUsers(this.getUser().id, count, 'links').username}/>}
+                            <Avatar name={this.getOtherUsers(this.getUser().id, count, 'links').username}
+                                    uno={this.getOtherUsers(this.getUser().id, count, 'links').uno}
+                                    finished={this.getOtherUsers(this.getUser().id, count, 'links').finished}
+                                    ranking={this.state.ranking}/>}
                             {count >= 3 && <CardsBack
-                                className="cardDeck"
+                                className="cardDeckBack"
                                 style={{display: 'block'}}
                                 count={this.getOtherUsers(this.getUser().id, count, 'links')['cards'].length}/>}
                         </Col>
-                        <Col lg={3} style={{marginTop: '2em', marginBottom: '3em', textAlign: 'right'}}>
+                        <Col sm={3} style={{marginTop: '2em', marginBottom: '3em', textAlign: 'right'}}>
                             <CardsFront
                                 deck={Array.of(this.state.stack)}
                                 isDisabled={true}
+                                cssClass={"storagePile"}
                             />
                         </Col>
-                        <Col lg={3} style={{marginTop: '2em', marginBottom: '3em', textAlign: 'left'}}>
-                            <Deck/>
+                        <Col sm={3} style={{marginTop: '2em', marginBottom: '3em', textAlign: 'left'}}>
+                            <Deck
+                                isDisabled={this.state.userTurn !== this.getUser().id}
+                            />
                         </Col>
                         <Col lg="3">
                             {/* Opponent 3 */}
                             {count >= 4 && this.state.userTurn === this.getOtherUsers(this.getUser().id, count, 'rechts').id &&
-                            <AvatarActive name={this.getOtherUsers(this.getUser().id, count, 'rechts').username}/>}
+                            <AvatarActive name={this.getOtherUsers(this.getUser().id, count, 'rechts').username}
+                                          uno={this.getOtherUsers(this.getUser().id, count, 'rechts').uno}/>}
                             {count >= 4 && this.state.userTurn !== this.getOtherUsers(this.getUser().id, count, 'rechts').id &&
-                            <Avatar name={this.getOtherUsers(this.getUser().id, count, 'rechts').username}/>}
+                            <Avatar name={this.getOtherUsers(this.getUser().id, count, 'rechts').username}
+                                    uno={this.getOtherUsers(this.getUser().id, count, 'rechts').uno}
+                                    finished={this.getOtherUsers(this.getUser().id, count, 'rechts').finished}
+                                    ranking={this.state.ranking}/>}
                             {count >= 4 && <CardsBack
-                                className="cardDeck"
+                                className="cardDeckBack"
                                 style={{display: 'block'}}
                                 count={this.getOtherUsers(this.getUser().id, count, 'rechts')['cards'].length}/>}
                         </Col>
                     </Row>
                     <Row>
-                        <Col lg="3"/>
+                        <Col sm="3" style={{textAlign: 'center'}}>
+                            <div className="alignBottomDiv">
+                                {this.state.userTurn === this.getUser().id &&
+                                <AvatarActive name={this.getUser().username} uno={this.getUser().uno}/>}
+                                {this.state.userTurn !== this.getUser().id &&
+                                <Avatar name={this.getUser().username} uno={this.getUser().uno}
+                                        finished={this.getUser().finished}
+                                        ranking={this.state.ranking}/>}
+                            </div>
+                        </Col>
                         <Col style={{textAlign: 'center'}}>
-                            {this.state.userTurn === this.getUser().id &&
-                            <AvatarActive name={this.getUser().username}/>}
-                            {this.state.userTurn !== this.getUser().id && <Avatar name={this.getUser().username}/>}
                             <CardsFront
-                                className="cardDeck"
                                 deck={this.getCards()}
                                 isDisabled={this.state.userTurn !== this.getUser().id}
+                                cssClass={"cardDeck"}
                             />
-                            <button className="alignBottom uno-button">UNO!</button>
                         </Col>
-                        <Col lg="3"/>
+                        <Col sm="3">
+                            <div className="alignBottomDiv">
+                                {!this.getUser().finished && <button className="uno-button"
+                                                                     onClick={() => this.unoClickedHandler()}>UNO!</button>}
+                            </div>
+                        </Col>
                     </Row>
                 </div>
             )
         } else {
             return (<div>Loading...</div>)
         }
-
     }
 }
 
 const
-    Avatar = ({name}) =>
+    Avatar = ({name, uno, finished, ranking}) =>
         <div className="avatar alignBottom">
             <Image src="https://img.icons8.com/material-sharp/64/000000/user.png"
                    alt="User Icon"/>
             <p style={{marginBottom: '0'}}>{name}</p>
+            {console.log(uno)}
+            {uno && !finished && <p className="uno">UNO</p>}
+            {uno && finished &&
+            <p className="finishedLabel">{ranking.findIndex(n => n.username.toString() === name.toString()) + 1}.
+                Rank</p>}
         </div>;
 
 const
-    AvatarActive = ({name}) =>
+    AvatarActive = ({name, uno}) =>
         <div className="avatar alignBottom">
             <ActiveAvatar/>
             <p style={{marginBottom: '0'}}>{name}</p>
+            {console.log(uno)}
+            {uno && <p className="uno">UNO</p>}
         </div>;
 
 const
-    Deck = () => {
+    Deck = ({isDisabled}) => {
         return <div className="cardDeck">
-            <button onClick={() => deckClickedHandler()} className="deck">
+            {!isDisabled && <button onClick={() => deckClickedHandler()} className="deck">
                 <p>UNO</p>
-            </button>
+            </button>}
+            {isDisabled && <button style={{disabled: true}} className="deck">
+                <p>UNO</p>
+            </button>}
         </div>
     };
 
