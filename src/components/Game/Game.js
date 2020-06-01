@@ -159,7 +159,7 @@ class Game extends Component {
         }
         console.log(user);
 
-        if (user.user === 'bot') {
+        if (user !== undefined && user.user === 'bot') {
             fetch('http://localhost:8000/api/playBot', {
                 method: "POST",
                 mode: "cors",
@@ -286,7 +286,6 @@ const
             <Image src="https://img.icons8.com/material-sharp/64/000000/user.png"
                    alt="User Icon"/>
             <p style={{marginBottom: '0'}}>{name}</p>
-            {console.log(uno)}
             {uno && !finished && <p className="uno">UNO</p>}
             {uno && finished &&
             <p className="finishedLabel">{ranking}.
@@ -298,7 +297,6 @@ const
         <div className="avatar alignBottom">
             <ActiveAvatar/>
             <p style={{marginBottom: '0'}}>{name}</p>
-            {console.log(uno)}
             {uno && <p className="uno">UNO</p>}
         </div>;
 
