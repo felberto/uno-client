@@ -157,7 +157,6 @@ class Game extends Component {
                 user = this.state.users[i];
             }
         }
-        console.log(user);
 
         if (user !== undefined && user.user === 'bot') {
             fetch('http://localhost:8000/api/playBot', {

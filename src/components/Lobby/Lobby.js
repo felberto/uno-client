@@ -40,7 +40,6 @@ class Lobby extends Component {
 
     leaveLobby() {
         leaveLobby();
-        console.log('client: left game');
         this.props.history.push('/');
     }
 
