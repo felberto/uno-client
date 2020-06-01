@@ -4,7 +4,6 @@ import {withRouter} from "react-router-dom";
 class CardsBack extends Component {
     render() {
         const loopArray = Array.from(Array(this.props.count), (_, x) => x);
-        console.log(loopArray);
         return (
             <div className="cardDeckBack">
                 {loopArray.map((_, i) => {
