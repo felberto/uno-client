@@ -18,8 +18,7 @@ class Game extends Component {
             users: [],
             deck: [],
             stack: {},
-            userTurn: {},
-            ranking: []
+            userTurn: {}
         };
         getData((err, data) => this.setState({
             loading: false,
@@ -28,8 +27,7 @@ class Game extends Component {
             users: data.users,
             deck: data.deck,
             stack: data.stack,
-            userTurn: data.userTurn,
-            ranking: data.ranking
+            userTurn: data.userTurn
         }));
         finishGame((err, data) => this.finishGameFunction());
         cancelGame((err, data) => this.cancelGameFunction());
@@ -152,7 +150,7 @@ class Game extends Component {
         clickUno();
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState, snapshot) {
         let user;
         for (let i = 0; i < this.state.users.length; ++i) {
             if (this.state.users[i].id === this.state.userTurn) {
@@ -196,7 +194,7 @@ class Game extends Component {
                             <Avatar name={this.getOtherUsers(this.getUser().id, count, 'oben').username}
                                     uno={this.getOtherUsers(this.getUser().id, count, 'oben').uno}
                                     finished={this.getOtherUsers(this.getUser().id, count, 'oben').finished}
-                                    ranking={this.state.ranking}/>}
+                                    ranking={this.getOtherUsers(this.getUser().id, count, 'oben').rankingLastGame}/>}
                             {count >= 2 && <CardsBack
                                 style={{textAlign: 'center'}}
                                 className="cardDeckBack"
@@ -214,7 +212,7 @@ class Game extends Component {
                             <Avatar name={this.getOtherUsers(this.getUser().id, count, 'links').username}
                                     uno={this.getOtherUsers(this.getUser().id, count, 'links').uno}
                                     finished={this.getOtherUsers(this.getUser().id, count, 'links').finished}
-                                    ranking={this.state.ranking}/>}
+                                    ranking={this.getOtherUsers(this.getUser().id, count, 'links').rankingLastGame}/>}
                             {count >= 3 && <CardsBack
                                 className="cardDeckBack"
                                 style={{display: 'block'}}
@@ -241,7 +239,7 @@ class Game extends Component {
                             <Avatar name={this.getOtherUsers(this.getUser().id, count, 'rechts').username}
                                     uno={this.getOtherUsers(this.getUser().id, count, 'rechts').uno}
                                     finished={this.getOtherUsers(this.getUser().id, count, 'rechts').finished}
-                                    ranking={this.state.ranking}/>}
+                                    ranking={this.getOtherUsers(this.getUser().id, count, 'rechts').rankingLastGame}/>}
                             {count >= 4 && <CardsBack
                                 className="cardDeckBack"
                                 style={{display: 'block'}}
@@ -256,7 +254,7 @@ class Game extends Component {
                                 {this.state.userTurn !== this.getUser().id &&
                                 <Avatar name={this.getUser().username} uno={this.getUser().uno}
                                         finished={this.getUser().finished}
-                                        ranking={this.state.ranking}/>}
+                                        ranking={this.getUser().rankingLastGame}/>}
                             </div>
                         </Col>
                         <Col style={{textAlign: 'center'}}>
@@ -289,7 +287,7 @@ const
             <p style={{marginBottom: '0'}}>{name}</p>
             {uno && !finished && <p className="uno">UNO</p>}
             {uno && finished &&
-            <p className="finishedLabel">{ranking.findIndex(n => n.username.toString() === name.toString()) + 1}.
+            <p className="finishedLabel">{ranking}.
                 Rank</p>}
         </div>;
 
