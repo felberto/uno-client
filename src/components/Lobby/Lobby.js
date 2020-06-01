@@ -98,7 +98,7 @@ class Lobby extends Component {
                     <div>{
                         this.state.users.sort((a, b) => a.rankingLastGame > b.rankingLastGame ? 1 : -1).map((user) => {
                             return (
-                                <div>
+                                <div key={user.user}>
                                     {user.rankingLastGame}. {user.username}
                                 </div>
                             );
@@ -109,7 +109,7 @@ class Lobby extends Component {
                     <div>{
                         this.state.users.sort((a, b) => a.rankingTotal > b.rankingTotal ? 1 : -1).map((user) => {
                             return (
-                                <div>
+                                <div key={user.user}>
                                     {user.username}: {user.rankingTotal} points
                                 </div>
                             );
