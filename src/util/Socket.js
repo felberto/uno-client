@@ -1,5 +1,4 @@
 import socketIOClient from "socket.io-client";
-//ToDo: change variable for different environment
 const socket = socketIOClient(process.env.REACT_APP_SOCKET_IO_URL);
 
 function getData(data) {
